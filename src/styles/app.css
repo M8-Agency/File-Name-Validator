@@ -1,0 +1,256 @@
+@font-face {
+  font-family: "ITC Lubalin Graph Std";
+  src: url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Book.eot");
+  src: local("ITC Lubalin Graph Std Book"), local("LubalinGraphStd-Book"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Book.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Book.woff")
+      format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Book.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ITC Lubalin Graph Std";
+  src: url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-BookOblique.eot");
+  src: local("ITC Lubalin Graph Std Book"), local("LubalinGraphStd-BookOblique"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-BookOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-BookOblique.woff")
+      format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-BookOblique.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "ITC Lubalin Graph Std";
+  src: url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Demi.eot");
+  src: local("ITC Lubalin Graph Std Demi"), local("LubalinGraphStd-Demi"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Demi.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Demi.woff")
+      format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-Demi.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ITC Lubalin Graph Std";
+  src: url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-DemiOblique.eot");
+  src: local("ITC Lubalin Graph Std Demi"), local("LubalinGraphStd-DemiOblique"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-DemiOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-DemiOblique.woff")
+      format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/LubalinGraphStd-DemiOblique.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Futura Std";
+  src: url("https://s3.amazonaws.com/m8fonts/FuturaStd-Light.eot");
+  src: local("Futura Std Light"), local("FuturaStd-Light"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Light.woff") format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Light.ttf")
+      format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura Std";
+  src: url("https://s3.amazonaws.com/m8fonts/FuturaStd-Medium.eot");
+  src: local("Futura Std Medium"), local("FuturaStd-Medium"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Medium.woff") format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Medium.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futura Std";
+  src: url("https://s3.amazonaws.com/m8fonts/FuturaStd-Bold.eot");
+  src: local("Futura Std Medium"), local("FuturaStd-Bold"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Bold.woff") format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-Bold.ttf")
+      format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futura Std";
+  src: url("https://s3.amazonaws.com/m8fonts/FuturaStd-ExtraBold.eot");
+  src: local("Futura Std Medium"), local("FuturaStd-ExtraBold"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-ExtraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-ExtraBold.woff")
+      format("woff"),
+    url("https://s3.amazonaws.com/m8fonts/FuturaStd-ExtraBold.ttf")
+      format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --light-gray: #f4f4f4;
+  --gray: #6e6e6e;
+  --purple: #640088;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: url(https://m8website2018-vxhdb1nikcdy49t.stackpathdns.com/static/images/angled/services-03.png)
+    no-repeat;
+  background-size: cover;
+  font-family: "ITC Lubalin Graph Std", Georgia, Times, Times New Roman, serif;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Futura Std", Geneva, Tahoma, Verdana, sans-serif;
+}
+
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+img,
+input,
+select,
+form,
+table,
+tr,
+td,
+tbody {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 1rem auto;
+  max-width: 800px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+p,
+ul,
+img {
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1.2rem;
+}
+
+li {
+  margin-bottom: 0.6rem;
+}
+
+.ToolList {
+  list-style: none;
+}
+.ToolList span {
+  margin-left: 0.5rem;
+  font-style: italic;
+  color: var(--gray);
+}
+
+.InfoBox {
+  background: var(--black);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 15px;
+}
+.InfoBox h4 {
+  margin: 0;
+}
+.InfoBox a {
+  color: var(--white);
+  transition: all 0.6s;
+}
+.InfoBox a:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.EmailSignatureGenerator {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  align-items: flex-start;
+  justify-items: center;
+}
+.EmailSignatureGenerator form {
+}
+.input-holder {
+}
+.input-holder label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+  font-size: 0.65rem;
+}
+.input-holder input {
+  display: block;
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  width: 400px;
+}
+.input-holder input.copied {
+  background: var(--purple);
+  color: var(--white);
+  font-weight: bold;
+  transition: all 0.6s;
+}
+
+.SigVisualizer {
+  background: white;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 1px solid #e2e2e2;
+}

@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import '../styles/app.css';
+import NameGenerator from "../components/NameGenerator";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <main>
+        <h1>M8 Name Validator</h1>
+        <NameGenerator />
+      </main>
     );
   }
 }

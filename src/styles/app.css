@@ -216,7 +216,7 @@ li {
   color: var(--black);
 }
 
-.EmailSignatureGenerator {
+.NameGenerator {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
@@ -224,7 +224,7 @@ li {
   align-items: flex-start;
   justify-items: center;
 }
-.EmailSignatureGenerator form {
+.NameGenerator form {
 }
 .input-holder {
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import { Grid, Col, Row } from "react-bootstrap";
 import { Formik } from "formik";
-import createName from "../utils/validator";
+import { createName, validateClient } from "../utils/validator";
 import Option from "muicss/lib/react/option";
 import Select from "muicss/lib/react/select";
+import { getCreativePilar } from "../data/creativePilars";
+import { getCreativeType } from "../data/creativeTypes";
+import { platform } from "../data/platforms";
 
 function CreativeForm(props) {
   const {
@@ -20,6 +23,8 @@ function CreativeForm(props) {
   } = props;
 
   const temp = createName();
+  const creativePilarList = getCreativePilar(values.client);
+  const creativeTypeList = getCreativeType(values.initiative);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -27,7 +32,9 @@ function CreativeForm(props) {
         <Row>
           <Col sm={6} md={6}>
             <div className="input-holder">
-              <label htmlFor="campaignCode">Campaign code</label>
+              <label htmlFor="campaignCode">
+                Campaign code <span> (Example: VFL.1034) </span>
+              </label>
               <input
                 id="campaignCode"
                 name="campaignCode"
@@ -135,10 +142,8 @@ function CreativeForm(props) {
           <Col sm={6} md={6}>
             <div className="input-holder">
               <label htmlFor="creativePilar">Creative pilar</label>
-              <input
-                id="creativePilar"
+              <Select
                 name="creativePilar"
-                type="text"
                 value={values.creativePilar}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -147,12 +152,20 @@ function CreativeForm(props) {
                     ? "text-input error"
                     : "text-input"
                 }
-              />
+              >
+                {creativePilarList.map(function(option, i) {
+                  return (
+                    <Option key={i} value={option.value} label={option.label} />
+                  );
+                })}
+              </Select>
+
               {errors.creativePilar &&
                 touched.creativePilar && (
                   <div className="input-feedback">{errors.creativePilar}</div>
                 )}
             </div>
+
             <div className="input-holder">
               <label htmlFor="size">Size/lenght</label>
               <input
@@ -195,39 +208,9 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            {/* <div className="input-holder">
-                            <label htmlFor="creativeType">Creative type</label>
-                            <input
-                                id="creativeType"
-                                name="creativeType"
-                                type="text"
-                                value={values.creativeType}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                className={errors.creativeType && touched.creativeType ? "text-input error" : "text-input"}
-                            />
-                            {errors.creativeType && touched.creativeType && <div className="input-feedback">{errors.creativeType}</div>}
-                        </div> */}
-
-            {/* <select
-                            id="creativeType"
-                            name="creativeType"
-                            value={values.creativeType}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className={errors.creativeType && touched.creativeType ? "text-input error" : "text-input"}
-                        >
-                            <option value=""></option>
-                            <option value="carousel">carousel</option>
-                            <option value="video">video</option>
-                            <option value="slideshow">slideshow</option>
-                            <option value="leadform">leadform</option>
-                            <option value="dynamic">dynamic</option>
-                        </select>  */}
-
             <div className="input-holder">
               <label htmlFor="creativeType">Creative type</label>
-              <select
+              <Select
                 id="creativeType"
                 name="creativeType"
                 value={values.creativeType}
@@ -239,13 +222,12 @@ function CreativeForm(props) {
                     : "text-input"
                 }
               >
-                <option value="" />
-                <option value="carousel">carousel</option>
-                <option value="video">video</option>
-                <option value="slideshow">slideshow</option>
-                <option value="leadform">leadform</option>
-                <option value="dynamic">dynamic</option>
-              </select>
+                {creativeTypeList.map(function(option, i) {
+                  return (
+                    <Option key={i} value={option.value} label={option.label} />
+                  );
+                })}
+              </Select>
 
               {errors.creativeType &&
                 touched.creativeType && (
@@ -255,7 +237,7 @@ function CreativeForm(props) {
 
             <div className="input-holder">
               <label htmlFor="platform">Platform</label>
-              <select
+              <Select
                 id="platform"
                 name="platform"
                 value={values.platform}
@@ -267,33 +249,17 @@ function CreativeForm(props) {
                     : "text-input"
                 }
               >
-                <option value="" />
-                <option value="fb">Facebook</option>
-                <option value="ig">Instagram</option>
-                <option value="fb+ig">Facebook+Instagram</option>
-                <option value="tw">Twitter</option>
-                <option value="yt">Youtube</option>
-              </select>
+                {platform.map(function(option, i) {
+                  return (
+                    <Option key={i} value={option.value} label={option.label} />
+                  );
+                })}
+              </Select>
               {errors.platform &&
                 touched.platform && (
                   <div className="input-feedback">{errors.platform}</div>
                 )}
             </div>
-            {/* <div className="input-holder">
-                            <label htmlFor="platform">Platform</label>
-                            <input
-                                id="platform"
-                                name="platform"
-                                type="text"
-                                value={values.platform}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                className={errors.platform && touched.platform ? "text-input error" : "text-input"}
-                            />
-                            {errors.platform && touched.platform && <div className="input-feedback">{errors.platform}</div>}
-
-
-                        </div> */}
           </Col>
         </Row>
         <Row>
@@ -368,6 +334,11 @@ function CreativeFields(props) {
         } else if (!/^([A-Z]){2,3}\.+([0-9]){4}$/i.test(values.campaignCode)) {
           errors.campaignCode =
             "Invalid characters or format. Example: VFL.7897";
+        } else {
+          errors.campaignCode = validateClient(
+            values.campaignCode,
+            values.client
+          );
         }
 
         if (!values.creativePilar) {

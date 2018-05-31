@@ -3,9 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "ajv": "^6.4.0",
+    "formik": "^0.11.11",
+    "joi": "^13.2.0",
+    "joi-validation-strategy": "^0.3.3",
+    "muicss": "^0.9.39",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "react-select": "^1.2.1",
+    "react-validation": "^3.0.7",
+    "react-validation-mixin": "^5.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

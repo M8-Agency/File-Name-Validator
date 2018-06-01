@@ -136,31 +136,57 @@ function CreativeForm(props) {
             )}
           </Col>
           <Col sm="6" md="6">
-            <div>
-              <Select
-                floatingLabel={true}
-                invalid={
-                  errors.creativePilar && touched.creativePilar ? true : false
-                }
-                name="creativePilar"
-                id="creativePilar"
-                label="Creative pilar"
-                value={values.creativePilar}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                {creativePilarList.map(function(option, i) {
-                  return (
-                    <Option key={i} value={option.value} label={option.label} />
-                  );
-                })}
-              </Select>
+            {values.client === "other" ? (
+              <div>
+                <Input
+                  floatingLabel={true}
+                  invalid={
+                    errors.creativePilar && touched.creativePilar ? true : false
+                  }
+                  name="creativePilar"
+                  id="creativePilar"
+                  label="Creative pilar"
+                  value={values.creativePilar}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
 
-              {errors.creativePilar &&
-                touched.creativePilar && (
-                  <div className="input-feedback">{errors.creativePilar}</div>
-                )}
-            </div>
+                {errors.creativePilar &&
+                  touched.creativePilar && (
+                    <div className="input-feedback">{errors.creativePilar}</div>
+                  )}
+              </div>
+            ) : (
+              <div>
+                <Select
+                  floatingLabel={true}
+                  invalid={
+                    errors.creativePilar && touched.creativePilar ? true : false
+                  }
+                  name="creativePilar"
+                  id="creativePilar"
+                  label="Creative pilar"
+                  value={values.creativePilar}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  {creativePilarList.map(function(option, i) {
+                    return (
+                      <Option
+                        key={i}
+                        value={option.value}
+                        label={option.label}
+                      />
+                    );
+                  })}
+                </Select>
+
+                {errors.creativePilar &&
+                  touched.creativePilar && (
+                    <div className="input-feedback">{errors.creativePilar}</div>
+                  )}
+              </div>
+            )}
 
             <div>
               <Input

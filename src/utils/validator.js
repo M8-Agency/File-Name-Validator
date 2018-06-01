@@ -57,10 +57,12 @@ function validateClient(campaignCode, client) {
         error =
           "You selected Copa Airline, the client code does not match. It should be CPA ";
       break;
-    default:
+    case "htz":
       if (value !== "HTZ")
         error =
           "You selected Hertz, the client code does not match. It should be HTZ ";
+      break;
+    default:
       break;
   }
   return error;

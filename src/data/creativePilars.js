@@ -10,6 +10,7 @@ function getCreativePilar(client) {
 }
 
 const creativePilarHTZ = [
+  {},
   { value: "upto%off", label: "up to % off" },
   { value: "%off", label: "% off" },
   { value: "upto$off", label: "up to $off" },
@@ -23,6 +24,7 @@ const creativePilarHTZ = [
 ];
 
 const creativePilarVFL = [
+  {},
   { value: "WinterSunseekers", label: "Winter Sunseekers" },
   { value: "ImpulseGetaways", label: "Impulse Getaways" },
   { value: "FamilyMemoryMakers", label: "Family Memory Makers" },
@@ -36,6 +38,7 @@ const creativePilarVFL = [
 ];
 
 const creativePilarCPA = [
+  {},
   { value: "BeMore", label: "Be More" },
   { value: "GetBetter", label: "Get Better" },
   { value: "GoPlaces", label: "Go Places" }

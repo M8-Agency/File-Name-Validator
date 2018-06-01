@@ -1,4 +1,5 @@
 const platform = [
+  {},
   { value: "fb + ig", label: "Facebook + Instagram" },
   { value: "fb", label: "Facebook" },
   { value: "ig", label: "Instagram" },

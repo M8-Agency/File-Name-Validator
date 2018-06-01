@@ -9,6 +9,7 @@ function getCreativeType(initiative) {
 }
 
 const creativeTypeDisplay = [
+  {},
   { value: "html5", label: "Html5" },
   { value: "video", label: "Video" },
   { value: "audio", label: "Audio" },
@@ -23,6 +24,7 @@ const creativeTypeDisplay = [
 ];
 
 const creativeTypeSocial = [
+  {},
   { value: "carousel", label: "Carousel" },
   { value: "image", label: "Image" },
   { value: "gif", label: "Gif" },

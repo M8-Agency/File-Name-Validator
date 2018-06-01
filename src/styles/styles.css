@@ -9,7 +9,9 @@
   z-index: 2;
   transition: left 0.2s;
 }
-
+.mui-appbar a {
+  color: #fff !important;
+}
 #sidedrawer {
   position: fixed;
   top: 0;
@@ -20,6 +22,10 @@
   z-index: 2;
   background-color: #fff;
   transition: transform 0.2s;
+}
+
+.mui-container-fluid {
+  margin-top: 40px;
 }
 
 #content-wrapper {
@@ -107,4 +113,20 @@
 #footer a {
   color: #fff;
   text-decoration: underline;
+}
+
+/**
+ * Error
+ */
+.input-feedback {
+  color: red;
+  font-weight: bold;
+  font-size: 0.65rem;
+  margin-top: -17px;
+}
+
+input.error {
+  border-color: red;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 0 3px rgba(255, 0, 0, 0.1);
 }

@@ -20,7 +20,7 @@ function createName(
   const _creativeVariation = creativeVariation
     ? creativeVariation.toLowerCase() + _tech + "_"
     : "";
-  const _platform = platform ? platform.toLowerCase() + "_" : "";
+  const _platform = platform ? platform.toLowerCase() : "";
 
   const _carouselFrame =
     creativeType && carouselFrame ? "-" + carouselFrame.toLowerCase() : "";

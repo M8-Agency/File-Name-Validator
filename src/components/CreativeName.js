@@ -1,5 +1,10 @@
 import React from "react";
-import { Grid, Col, Row } from "react-bootstrap";
+import Container from "muicss/lib/react/container";
+import Row from "muicss/lib/react/row";
+import Col from "muicss/lib/react/col";
+import Input from "muicss/lib/react/input";
+import Button from "muicss/lib/react/button";
+import Form from "muicss/lib/react/form";
 import { Formik } from "formik";
 import { createName, validateClient } from "../utils/validator";
 import Option from "muicss/lib/react/option";
@@ -15,37 +20,32 @@ function CreativeForm(props) {
     errors,
     isSubmitting,
     handleChange,
-    handleChange1,
     handleBlur,
     handleSubmit,
     handleReset,
     dirty
   } = props;
 
-  const temp = createName();
   const creativePilarList = getCreativePilar(values.client);
   const creativeTypeList = getCreativeType(values.initiative);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid>
+    <form>
+      <Container fluid={true}>
         <Row>
-          <Col sm={6} md={6}>
-            <div className="input-holder">
-              <label htmlFor="campaignCode">
-                Campaign code <span> (Example: VFL.1034) </span>
-              </label>
-              <input
+          <Col sm="6" md="6">
+            <div>
+              <Input
                 id="campaignCode"
                 name="campaignCode"
+                label="Campaign code (Example: VFL.1034)"
+                floatingLabel={true}
                 type="text"
                 value={values.campaignCode}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.campaignCode && touched.campaignCode
-                    ? "text-input error"
-                    : "text-input"
+                invalid={
+                  errors.campaignCode && touched.campaignCode ? true : false
                 }
               />
               {errors.campaignCode &&
@@ -53,20 +53,17 @@ function CreativeForm(props) {
                   <div className="input-feedback">{errors.campaignCode}</div>
                 )}
             </div>
-            <div className="input-holder">
-              <label htmlFor="concept">Concept</label>
-              <input
+            <div>
+              <Input
+                label="Concept"
+                floatingLabel={true}
                 id="concept"
                 name="concept"
                 type="text"
                 value={values.concept}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.concept && touched.concept
-                    ? "text-input error"
-                    : "text-input"
-                }
+                invalid={errors.concept && touched.concept ? true : false}
               />
               {errors.concept &&
                 touched.concept && (
@@ -74,20 +71,21 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="creativeVariation">Creative variation</label>
-              <input
+            <div>
+              <Input
+                label="Creative variation"
+                floatingLabel={true}
+                invalid={
+                  errors.creativeVariation && touched.creativeVariation
+                    ? true
+                    : false
+                }
                 id="creativeVariation"
                 name="creativeVariation"
                 type="text"
                 value={values.creativeVariation}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.creativeVariation && touched.creativeVariation
-                    ? "text-input error"
-                    : "text-input"
-                }
               />
               {errors.creativeVariation &&
                 touched.creativeVariation && (
@@ -97,20 +95,17 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="language">Language</label>
-              <input
+            <div>
+              <Input
+                label="Language (Example: esp or esp-eng)"
+                floatingLabel={true}
+                invalid={errors.language && touched.language ? true : false}
                 id="language"
                 name="language"
                 type="text"
                 value={values.language}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.language && touched.language
-                    ? "text-input error"
-                    : "text-input"
-                }
               />
               {errors.language &&
                 touched.language && (
@@ -118,40 +113,41 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="carouselFrame">Carousel frame</label>
-              <input
-                id="carouselFrame"
-                name="carouselFrame"
-                type="text"
-                value={values.carouselFrame}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={
-                  errors.carouselFrame && touched.carouselFrame
-                    ? "text-input error"
-                    : "text-input"
-                }
-              />
-              {errors.carouselFrame &&
-                touched.carouselFrame && (
-                  <div className="input-feedback">{errors.carouselFrame}</div>
-                )}
-            </div>
+            {values.initiative === "social" && (
+              <div>
+                <Input
+                  label="Carousel frame"
+                  floatingLabel={true}
+                  invalid={
+                    errors.carouselFrame && touched.carouselFrame ? true : false
+                  }
+                  id="carouselFrame"
+                  name="carouselFrame"
+                  type="text"
+                  value={values.carouselFrame}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.carouselFrame &&
+                  touched.carouselFrame && (
+                    <div className="input-feedback">{errors.carouselFrame}</div>
+                  )}
+              </div>
+            )}
           </Col>
-          <Col sm={6} md={6}>
-            <div className="input-holder">
-              <label htmlFor="creativePilar">Creative pilar</label>
+          <Col sm="6" md="6">
+            <div>
               <Select
+                floatingLabel={true}
+                invalid={
+                  errors.creativePilar && touched.creativePilar ? true : false
+                }
                 name="creativePilar"
+                id="creativePilar"
+                label="Creative pilar"
                 value={values.creativePilar}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.creativePilar && touched.creativePilar
-                    ? "text-input error"
-                    : "text-input"
-                }
               >
                 {creativePilarList.map(function(option, i) {
                   return (
@@ -166,20 +162,17 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="size">Size/lenght</label>
-              <input
+            <div>
+              <Input
+                label="Size/lenght (Example: 300x200 or 5sec)"
+                floatingLabel={true}
+                invalid={errors.size && touched.size ? true : false}
                 id="size"
                 name="size"
                 type="text"
                 value={values.size}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.size && touched.size
-                    ? "text-input error"
-                    : "text-input"
-                }
               />
               {errors.size &&
                 touched.size && (
@@ -187,20 +180,17 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="tech">Tech (optional)</label>
-              <input
+            <div>
+              <Input
+                label="Tech (optional)"
+                floatingLabel={true}
+                invalid={errors.tech && touched.tech ? true : false}
                 id="tech"
                 name="tech"
                 type="text"
                 value={values.tech}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.tech && touched.tech
-                    ? "text-input error"
-                    : "text-input"
-                }
               />
               {errors.tech &&
                 touched.tech && (
@@ -208,19 +198,18 @@ function CreativeForm(props) {
                 )}
             </div>
 
-            <div className="input-holder">
-              <label htmlFor="creativeType">Creative type</label>
+            <div>
               <Select
+                label="Creative type"
+                floatingLabel={true}
+                invalid={
+                  errors.creativeType && touched.creativeType ? true : false
+                }
                 id="creativeType"
                 name="creativeType"
                 value={values.creativeType}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.creativeType && touched.creativeType
-                    ? "text-input error"
-                    : "text-input"
-                }
               >
                 {creativeTypeList.map(function(option, i) {
                   return (
@@ -234,74 +223,81 @@ function CreativeForm(props) {
                   <div className="input-feedback">{errors.creativeType}</div>
                 )}
             </div>
-
-            <div className="input-holder">
-              <label htmlFor="platform">Platform</label>
-              <Select
-                id="platform"
-                name="platform"
-                value={values.platform}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={
-                  errors.platform && touched.platform
-                    ? "text-input error"
-                    : "text-input"
-                }
-              >
-                {platform.map(function(option, i) {
-                  return (
-                    <Option key={i} value={option.value} label={option.label} />
-                  );
-                })}
-              </Select>
-              {errors.platform &&
-                touched.platform && (
-                  <div className="input-feedback">{errors.platform}</div>
+            {values.initiative === "social" && (
+              <div>
+                <Select
+                  label="Platform"
+                  floatingLabel={true}
+                  invalid={errors.platform && touched.platform ? true : false}
+                  id="platform"
+                  name="platform"
+                  value={values.platform}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  {platform.map(function(option, i) {
+                    return (
+                      <Option
+                        key={i}
+                        value={option.value}
+                        label={option.label}
+                      />
+                    );
+                  })}
+                </Select>
+                {errors.platform &&
+                  touched.platform && (
+                    <div className="input-feedback">{errors.platform}</div>
+                  )}
+              </div>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col md="6" md-offset="3">
+            <div>
+              <Input
+                htmlFor="createName"
+                label="Creative name:"
+                type="text"
+                readOnly
+                id="m8-create-name"
+                value={createName(
+                  values.campaignCode,
+                  values.concept,
+                  values.creativePilar,
+                  values.creativeVariation,
+                  values.size,
+                  values.tech,
+                  values.language,
+                  values.creativeType,
+                  values.carouselFrame,
+                  values.platform
                 )}
+              />
             </div>
           </Col>
         </Row>
         <Row>
-          <Col sm={12} md={12}>
-            <div className="input-holder" align="center">
-              <div className="input-holder">
-                <label htmlFor="createName">Creative name:</label>
-                <input
-                  className="center"
-                  htmlFor="createName"
-                  type="text"
-                  id="m8-create-name"
-                  value={createName(
-                    values.campaignCode,
-                    values.concept,
-                    values.creativePilar,
-                    values.creativeVariation,
-                    values.size,
-                    values.tech,
-                    values.language,
-                    values.creativeType,
-                    values.carouselFrame,
-                    values.platform
-                  )}
-                />
-                <input
-                  className={values.btCopiedClass}
-                  type="submit"
-                  value={values.btCopiedText}
-                />
-                <button
-                  type="submit"
-                  onClick={handleReset}
-                  disabled={!dirty || isSubmitting}
-                >
-                  Reset
-                </button>
-              </div>
+          <Col md="6" md-offset="3">
+            <div className="mui--text-center">
+              <Button variant="raised" onClick={handleSubmit} color="primary">
+                {values.btCopiedText}
+              </Button>
+            </div>
+            <div className="mui--text-center">
+              <Button
+                variant="raised"
+                color="primary"
+                onClick={handleReset}
+                disabled={!dirty || isSubmitting}
+              >
+                Reset
+              </Button>
             </div>
           </Col>
         </Row>
-      </Grid>
+      </Container>
     </form>
   );
 }
@@ -389,15 +385,15 @@ function CreativeFields(props) {
 
         if (!values.language) {
           errors.language = "Required";
-        } else if (!/^([a-z]){3}(\-([a-z]){3})*$/i.test(values.language)) {
+        } else if (!/^([a-z]){3}(-([a-z]){3})*$/i.test(values.language)) {
           errors.language = "Invalid characters";
         }
 
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      handleSubmit={(values, { setSubmitting }) => {
+        alert("AAA");
         setSubmitting(false);
-
         const signature = document.querySelector("#m8-create-name");
         const range = document.createRange();
         range.selectNode(signature);
@@ -447,11 +443,7 @@ class Creative extends React.Component {
   }
 
   render() {
-    return (
-      <main>
-        <CreativeFields {...this.state} />
-      </main>
-    );
+    return <CreativeFields {...this.state} />;
   }
 }
 

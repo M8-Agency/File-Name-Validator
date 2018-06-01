@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import CreativeSpecs from "../components/CreativeSpecs";
 import { Creative } from "../components/CreativeName";
-import "../styles/app.css";
+import Header from "../containers/Header";
+import "../styles/styles.css";
 
 function NoMatch() {
   return <div>WHOOPS!</div>;
@@ -11,16 +12,16 @@ function NoMatch() {
 class App extends Component {
   render() {
     return (
-      <main>
-        <h1>M8 Name Validator</h1>
-        <BrowserRouter>
+      <BrowserRouter>
+        <React.Fragment>
+          <Header />
           <Switch>
             <Route exact path="/" component={CreativeSpecs} />
             <Route path="/creative/" component={Creative} />
             <Route component={NoMatch} />
           </Switch>
-        </BrowserRouter>
-      </main>
+        </React.Fragment>
+      </BrowserRouter>
     );
   }
 }

@@ -3,6 +3,10 @@ import Option from "muicss/lib/react/option";
 import Select from "muicss/lib/react/select";
 import clients from "../data/clients";
 import initiatives from "../data/initiatives";
+import Container from "muicss/lib/react/container";
+import Row from "muicss/lib/react/row";
+import Col from "muicss/lib/react/col";
+import Button from "muicss/lib/react/button";
 
 class CreativeSpecs extends React.Component {
   constructor(props) {
@@ -35,35 +39,51 @@ class CreativeSpecs extends React.Component {
 
   render() {
     return (
-      <form>
-        <legend>Please select client:</legend>
-        <Select
-          name="client"
-          value={this.state.client}
-          onChange={this.onChange}
-        >
-          {clients.map(function(option, i) {
-            return <Option key={i} value={option.value} label={option.label} />;
-          })}
-        </Select>
-        <legend>Select initiative:</legend>
-        <Select
-          name="initiative"
-          value={this.state.initiative}
-          onChange={this.onChange}
-        >
-          {initiatives.map(function(option, i) {
-            return <Option key={i} value={option.value} label={option.label} />;
-          })}
-        </Select>
+      <Container fluid={true}>
+        <div className="mui--text-center">
+          <h1>Creative Name Validator</h1>
+        </div>
+        <Row>
+          <Col md="2" md-offset="5">
+            <form>
+              <Select
+                label="Client:"
+                name="client"
+                value={this.state.client}
+                onChange={this.onChange}
+              >
+                {clients.map(function(option, i) {
+                  return (
+                    <Option key={i} value={option.value} label={option.label} />
+                  );
+                })}
+              </Select>
 
-        <button
-          className="mui-btn mui-btn--raised"
-          onClick={this.onClick.bind(this)}
-        >
-          Get started
-        </button>
-      </form>
+              <Select
+                label="initiative"
+                name="initiative"
+                value={this.state.initiative}
+                onChange={this.onChange}
+              >
+                {initiatives.map(function(option, i) {
+                  return (
+                    <Option key={i} value={option.value} label={option.label} />
+                  );
+                })}
+              </Select>
+              <div className="mui--text-center">
+                <Button
+                  className="mui-btn mui-btn--raised"
+                  color="primary"
+                  onClick={this.onClick.bind(this)}
+                >
+                  Get started
+                </Button>
+              </div>
+            </form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

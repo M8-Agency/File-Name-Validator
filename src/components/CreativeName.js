@@ -4,12 +4,11 @@ import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import Input from "muicss/lib/react/input";
 import Button from "muicss/lib/react/button";
-import Form from "muicss/lib/react/form";
 import { Formik } from "formik";
 import { createName, validateClient } from "../utils/validator";
 import Option from "muicss/lib/react/option";
 import Select from "muicss/lib/react/select";
-import { getCreativePilar } from "../data/creativePilars";
+import { getCreativePillar } from "../data/creativePillars";
 import { getCreativeType } from "../data/creativeTypes";
 import { platform } from "../data/platforms";
 
@@ -26,7 +25,7 @@ function CreativeForm(props) {
     dirty
   } = props;
 
-  const creativePilarList = getCreativePilar(values.client);
+  const creativePillarList = getCreativePillar(values.client);
   const creativeTypeList = getCreativeType(values.initiative);
 
   return (
@@ -141,19 +140,23 @@ function CreativeForm(props) {
                 <Input
                   floatingLabel={true}
                   invalid={
-                    errors.creativePilar && touched.creativePilar ? true : false
+                    errors.creativePillar && touched.creativePillar
+                      ? true
+                      : false
                   }
-                  name="creativePilar"
-                  id="creativePilar"
-                  label="Creative pilar"
-                  value={values.creativePilar}
+                  name="creativePillar"
+                  id="creativePillar"
+                  label="Creative pillar"
+                  value={values.creativePillar}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
 
-                {errors.creativePilar &&
-                  touched.creativePilar && (
-                    <div className="input-feedback">{errors.creativePilar}</div>
+                {errors.creativePillar &&
+                  touched.creativePillar && (
+                    <div className="input-feedback">
+                      {errors.creativePillar}
+                    </div>
                   )}
               </div>
             ) : (
@@ -161,16 +164,18 @@ function CreativeForm(props) {
                 <Select
                   floatingLabel={true}
                   invalid={
-                    errors.creativePilar && touched.creativePilar ? true : false
+                    errors.creativePillar && touched.creativePillar
+                      ? true
+                      : false
                   }
-                  name="creativePilar"
-                  id="creativePilar"
-                  label="Creative pilar"
-                  value={values.creativePilar}
+                  name="creativePillar"
+                  id="creativePillar"
+                  label="Creative pillar"
+                  value={values.creativePillar}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 >
-                  {creativePilarList.map(function(option, i) {
+                  {creativePillarList.map(function(option, i) {
                     return (
                       <Option
                         key={i}
@@ -181,9 +186,11 @@ function CreativeForm(props) {
                   })}
                 </Select>
 
-                {errors.creativePilar &&
-                  touched.creativePilar && (
-                    <div className="input-feedback">{errors.creativePilar}</div>
+                {errors.creativePillar &&
+                  touched.creativePillar && (
+                    <div className="input-feedback">
+                      {errors.creativePillar}
+                    </div>
                   )}
               </div>
             )}
@@ -291,14 +298,15 @@ function CreativeForm(props) {
                 value={createName(
                   values.campaignCode,
                   values.concept,
-                  values.creativePilar,
+                  values.creativePillar,
                   values.creativeVariation,
                   values.size,
                   values.tech,
                   values.language,
                   values.creativeType,
                   values.carouselFrame,
-                  values.platform
+                  values.platform,
+                  values.initiative
                 )}
               />
             </div>
@@ -334,7 +342,7 @@ function CreativeFields(props) {
     <Formik
       initialValues={{
         campaignCode: "",
-        creativePilar: "",
+        creativePillar: "",
         concept: "",
         creativeVariation: "",
         size: "",
@@ -343,7 +351,7 @@ function CreativeFields(props) {
         creativeType: "",
         carouselFrame: "",
         platform: "",
-        btCopiedText: "Paste name to clipboard!",
+        btCopiedText: "Copy name to clipboard!",
         btCopiedClass: "",
         languageTemp: "",
         client: client,
@@ -363,10 +371,10 @@ function CreativeFields(props) {
           );
         }
 
-        if (!values.creativePilar) {
-          errors.creativePilar = "Required";
-        } else if (!/^([a-z]){1,15}$/i.test(values.creativePilar)) {
-          errors.creativePilar = "Invalid characters on creative pilar";
+        if (!values.creativePillar) {
+          errors.creativePillar = "Required";
+        } else if (!/^([a-z]){1,15}$/i.test(values.creativePillar)) {
+          errors.creativePillar = "Invalid characters on creative pillar";
         }
 
         if (!values.concept) {

@@ -1,15 +1,15 @@
-function getCreativePilar(client) {
+function getCreativePillar(client) {
   switch (client) {
     case "htz":
-      return creativePilarHTZ;
+      return creativePillarHTZ;
     case "vfl":
-      return creativePilarVFL;
+      return creativePillarVFL;
     default:
-      return creativePilarCPA;
+      return creativePillarCPA;
   }
 }
 
-const creativePilarHTZ = [
+const creativePillarHTZ = [
   {},
   { value: "upto%off", label: "up to % off" },
   { value: "%off", label: "% off" },
@@ -23,7 +23,7 @@ const creativePilarHTZ = [
   { value: "generic", label: "generic" }
 ];
 
-const creativePilarVFL = [
+const creativePillarVFL = [
   {},
   { value: "WinterSunseekers", label: "Winter Sunseekers" },
   { value: "ImpulseGetaways", label: "Impulse Getaways" },
@@ -37,12 +37,12 @@ const creativePilarVFL = [
   { value: "Partner", label: "Partner" }
 ];
 
-const creativePilarCPA = [
+const creativePillarCPA = [
   {},
   { value: "BeMore", label: "Be More" },
   { value: "GetBetter", label: "Get Better" },
   { value: "GoPlaces", label: "Go Places" }
 ];
 
-export default { getCreativePilar };
-export { getCreativePilar };
+export default { getCreativePillar };
+export { getCreativePillar };

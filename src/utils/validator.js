@@ -1,18 +1,21 @@
 function createName(
   campaignCode,
   concept,
-  creativePilar,
+  creativePillar,
   creativeVariation,
   size,
   tech,
   language,
   creativeType,
   carouselFrame,
-  platform
+  platform,
+  initiative
 ) {
   let name = {};
   const _campaignCode = campaignCode ? campaignCode.toUpperCase() + "_" : "";
-  const _creativePilar = creativePilar ? creativePilar.toLowerCase() + "_" : "";
+  const _creativePillar = creativePillar
+    ? creativePillar.toLowerCase() + "_"
+    : "";
   const _concept = concept ? concept.toLowerCase() + "_" : "";
   const _size = size ? size.toLowerCase() + "_" : "";
   const _language = language ? language.toLowerCase() + "_" : "";
@@ -24,14 +27,22 @@ function createName(
 
   const _carouselFrame =
     creativeType && carouselFrame ? "-" + carouselFrame.toLowerCase() : "";
-  const _creativeType = creativeType
-    ? creativeType.toLowerCase() + _carouselFrame + "_"
-    : "";
 
-  // name = campaignCode + '_' + creativePilar + '_' + concept + '_' + size + '_' + creativeVariation + '-' + tech + '_' + language + '_' + creativeType + '-' + carouselFrame + '_' + platform;
+  const _creativeType = creativeType
+    ? creativeType.toLowerCase() +
+      _carouselFrame +
+      (initiative === "social" ? "_" : "")
+    : "";
+  // const _creativeType = creativeType
+  //   ? `${creativeType.toLowerCase()}${_carouselFrame} _`
+  //   : "";
+
+  // const final = initiative == "social" ? ''
+
+  // name = campaignCode + '_' + creativePillar + '_' + concept + '_' + size + '_' + creativeVariation + '-' + tech + '_' + language + '_' + creativeType + '-' + carouselFrame + '_' + platform;
   name =
     _campaignCode +
-    _creativePilar +
+    _creativePillar +
     _concept +
     _size +
     _creativeVariation +

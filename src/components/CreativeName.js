@@ -29,153 +29,239 @@ function CreativeForm(props) {
   const creativeTypeList = getCreativeType(values.initiative);
 
   return (
-    <form>
-      <Container fluid={true}>
-        <Row>
-          <Col sm="6" md="6">
-            <div>
-              <Input
-                id="campaignCode"
-                name="campaignCode"
-                label="Campaign code (Example: VFL.1034)"
-                floatingLabel={true}
-                type="text"
-                value={values.campaignCode}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                invalid={
-                  errors.campaignCode && touched.campaignCode ? true : false
-                }
-              />
-              {errors.campaignCode &&
-                touched.campaignCode && (
-                  <div className="input-feedback">{errors.campaignCode}</div>
-                )}
-            </div>
-            <div>
-              <Input
-                label="Concept"
-                floatingLabel={true}
-                id="concept"
-                name="concept"
-                type="text"
-                value={values.concept}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                invalid={errors.concept && touched.concept ? true : false}
-              />
-              {errors.concept &&
-                touched.concept && (
-                  <div className="input-feedback">{errors.concept}</div>
-                )}
-            </div>
-
-            <div>
-              <Input
-                label="Creative variation"
-                floatingLabel={true}
-                invalid={
-                  errors.creativeVariation && touched.creativeVariation
-                    ? true
-                    : false
-                }
-                id="creativeVariation"
-                name="creativeVariation"
-                type="text"
-                value={values.creativeVariation}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.creativeVariation &&
-                touched.creativeVariation && (
-                  <div className="input-feedback">
-                    {errors.creativeVariation}
-                  </div>
-                )}
-            </div>
-
-            <div>
-              <Input
-                label="Language (Example: esp or esp-eng)"
-                floatingLabel={true}
-                invalid={errors.language && touched.language ? true : false}
-                id="language"
-                name="language"
-                type="text"
-                value={values.language}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.language &&
-                touched.language && (
-                  <div className="input-feedback">{errors.language}</div>
-                )}
-            </div>
-
-            {values.initiative === "social" && (
+    <div id="content-wrapper">
+      <div class="mui--text-center">
+        <div class="mui--appbar-height" />
+        <br />
+        {values.client !== "aaa" && (
+          <div class="mui--text-subhead">
+            Client code: {values.client.toUpperCase()}
+          </div>
+        )}
+        <div class="mui--text-subhead">
+          Initiative: {values.initiative.toUpperCase()}
+        </div>
+      </div>
+      <form>
+        <Container fluid={true}>
+          <Row>
+            <Col sm="6" md="6">
               <div>
                 <Input
-                  label="Carousel frame"
+                  id="campaignCode"
+                  name="campaignCode"
+                  label={`Campaign code (Example: ${values.client.toUpperCase()}.1001)`}
                   floatingLabel={true}
-                  invalid={
-                    errors.carouselFrame && touched.carouselFrame ? true : false
-                  }
-                  id="carouselFrame"
-                  name="carouselFrame"
                   type="text"
-                  value={values.carouselFrame}
+                  value={values.campaignCode}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  invalid={
+                    errors.campaignCode && touched.campaignCode ? true : false
+                  }
                 />
-                {errors.carouselFrame &&
-                  touched.carouselFrame && (
-                    <div className="input-feedback">{errors.carouselFrame}</div>
+                {errors.campaignCode &&
+                  touched.campaignCode && (
+                    <div className="input-feedback">{errors.campaignCode}</div>
                   )}
               </div>
-            )}
-          </Col>
-          <Col sm="6" md="6">
-            {values.client === "other" ? (
               <div>
                 <Input
+                  label="Concept"
+                  floatingLabel={true}
+                  id="concept"
+                  name="concept"
+                  type="text"
+                  value={values.concept}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  invalid={errors.concept && touched.concept ? true : false}
+                />
+                {errors.concept &&
+                  touched.concept && (
+                    <div className="input-feedback">{errors.concept}</div>
+                  )}
+              </div>
+
+              <div>
+                <Input
+                  label="Creative variation"
                   floatingLabel={true}
                   invalid={
-                    errors.creativePillar && touched.creativePillar
+                    errors.creativeVariation && touched.creativeVariation
                       ? true
                       : false
                   }
-                  name="creativePillar"
-                  id="creativePillar"
-                  label="Creative pillar"
-                  value={values.creativePillar}
+                  id="creativeVariation"
+                  name="creativeVariation"
+                  type="text"
+                  value={values.creativeVariation}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-
-                {errors.creativePillar &&
-                  touched.creativePillar && (
+                {errors.creativeVariation &&
+                  touched.creativeVariation && (
                     <div className="input-feedback">
-                      {errors.creativePillar}
+                      {errors.creativeVariation}
                     </div>
                   )}
               </div>
-            ) : (
+
+              <div>
+                <Input
+                  label="Language (Example: spa or spa-eng)"
+                  floatingLabel={true}
+                  invalid={errors.language && touched.language ? true : false}
+                  id="language"
+                  name="language"
+                  type="text"
+                  value={values.language}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.language &&
+                  touched.language && (
+                    <div className="input-feedback">{errors.language}</div>
+                  )}
+              </div>
+
+              {values.initiative === "social" && (
+                <div>
+                  <Input
+                    label="Carousel frame"
+                    floatingLabel={true}
+                    invalid={
+                      errors.carouselFrame && touched.carouselFrame
+                        ? true
+                        : false
+                    }
+                    id="carouselFrame"
+                    name="carouselFrame"
+                    type="text"
+                    value={values.carouselFrame}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.carouselFrame &&
+                    touched.carouselFrame && (
+                      <div className="input-feedback">
+                        {errors.carouselFrame}
+                      </div>
+                    )}
+                </div>
+              )}
+            </Col>
+            <Col sm="6" md="6">
+              {values.client === "other" ? (
+                <div>
+                  <Input
+                    floatingLabel={true}
+                    invalid={
+                      errors.creativePillar && touched.creativePillar
+                        ? true
+                        : false
+                    }
+                    name="creativePillar"
+                    id="creativePillar"
+                    label="Creative pillar"
+                    value={values.creativePillar}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+
+                  {errors.creativePillar &&
+                    touched.creativePillar && (
+                      <div className="input-feedback">
+                        {errors.creativePillar}
+                      </div>
+                    )}
+                </div>
+              ) : (
+                <div>
+                  <Select
+                    floatingLabel={true}
+                    invalid={
+                      errors.creativePillar && touched.creativePillar
+                        ? true
+                        : false
+                    }
+                    name="creativePillar"
+                    id="creativePillar"
+                    label="Creative pillar"
+                    value={values.creativePillar}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    {creativePillarList.map(function(option, i) {
+                      return (
+                        <Option
+                          key={i}
+                          value={option.value}
+                          label={option.label}
+                        />
+                      );
+                    })}
+                  </Select>
+
+                  {errors.creativePillar &&
+                    touched.creativePillar && (
+                      <div className="input-feedback">
+                        {errors.creativePillar}
+                      </div>
+                    )}
+                </div>
+              )}
+
+              <div>
+                <Input
+                  label="Size/lenght (Example: 300x200 or 5sec)"
+                  floatingLabel={true}
+                  invalid={errors.size && touched.size ? true : false}
+                  id="size"
+                  name="size"
+                  type="text"
+                  value={values.size}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.size &&
+                  touched.size && (
+                    <div className="input-feedback">{errors.size}</div>
+                  )}
+              </div>
+
+              <div>
+                <Input
+                  label="Tech (optional)"
+                  floatingLabel={true}
+                  invalid={errors.tech && touched.tech ? true : false}
+                  id="tech"
+                  name="tech"
+                  type="text"
+                  value={values.tech}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.tech &&
+                  touched.tech && (
+                    <div className="input-feedback">{errors.tech}</div>
+                  )}
+              </div>
+
               <div>
                 <Select
+                  label="Creative type"
                   floatingLabel={true}
                   invalid={
-                    errors.creativePillar && touched.creativePillar
-                      ? true
-                      : false
+                    errors.creativeType && touched.creativeType ? true : false
                   }
-                  name="creativePillar"
-                  id="creativePillar"
-                  label="Creative pillar"
-                  value={values.creativePillar}
+                  id="creativeType"
+                  name="creativeType"
+                  value={values.creativeType}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 >
-                  {creativePillarList.map(function(option, i) {
+                  {creativeTypeList.map(function(option, i) {
                     return (
                       <Option
                         key={i}
@@ -186,153 +272,89 @@ function CreativeForm(props) {
                   })}
                 </Select>
 
-                {errors.creativePillar &&
-                  touched.creativePillar && (
-                    <div className="input-feedback">
-                      {errors.creativePillar}
-                    </div>
+                {errors.creativeType &&
+                  touched.creativeType && (
+                    <div className="input-feedback">{errors.creativeType}</div>
                   )}
               </div>
-            )}
-
-            <div>
-              <Input
-                label="Size/lenght (Example: 300x200 or 5sec)"
-                floatingLabel={true}
-                invalid={errors.size && touched.size ? true : false}
-                id="size"
-                name="size"
-                type="text"
-                value={values.size}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.size &&
-                touched.size && (
-                  <div className="input-feedback">{errors.size}</div>
-                )}
-            </div>
-
-            <div>
-              <Input
-                label="Tech (optional)"
-                floatingLabel={true}
-                invalid={errors.tech && touched.tech ? true : false}
-                id="tech"
-                name="tech"
-                type="text"
-                value={values.tech}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.tech &&
-                touched.tech && (
-                  <div className="input-feedback">{errors.tech}</div>
-                )}
-            </div>
-
-            <div>
-              <Select
-                label="Creative type"
-                floatingLabel={true}
-                invalid={
-                  errors.creativeType && touched.creativeType ? true : false
-                }
-                id="creativeType"
-                name="creativeType"
-                value={values.creativeType}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                {creativeTypeList.map(function(option, i) {
-                  return (
-                    <Option key={i} value={option.value} label={option.label} />
-                  );
-                })}
-              </Select>
-
-              {errors.creativeType &&
-                touched.creativeType && (
-                  <div className="input-feedback">{errors.creativeType}</div>
-                )}
-            </div>
-            {values.initiative === "social" && (
+              {values.initiative === "social" && (
+                <div>
+                  <Select
+                    label="Platform"
+                    floatingLabel={true}
+                    invalid={errors.platform && touched.platform ? true : false}
+                    id="platform"
+                    name="platform"
+                    value={values.platform}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    {platform.map(function(option, i) {
+                      return (
+                        <Option
+                          key={i}
+                          value={option.value}
+                          label={option.label}
+                        />
+                      );
+                    })}
+                  </Select>
+                  {errors.platform &&
+                    touched.platform && (
+                      <div className="input-feedback">{errors.platform}</div>
+                    )}
+                </div>
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col md="8" md-offset="2">
               <div>
-                <Select
-                  label="Platform"
-                  floatingLabel={true}
-                  invalid={errors.platform && touched.platform ? true : false}
-                  id="platform"
-                  name="platform"
-                  value={values.platform}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  {platform.map(function(option, i) {
-                    return (
-                      <Option
-                        key={i}
-                        value={option.value}
-                        label={option.label}
-                      />
-                    );
-                  })}
-                </Select>
-                {errors.platform &&
-                  touched.platform && (
-                    <div className="input-feedback">{errors.platform}</div>
+                <Input
+                  htmlFor="createName"
+                  label="Creative name:"
+                  type="text"
+                  readOnly
+                  id="m8-create-name"
+                  value={createName(
+                    values.campaignCode,
+                    values.concept,
+                    values.creativePillar,
+                    values.creativeVariation,
+                    values.size,
+                    values.tech,
+                    values.language,
+                    values.creativeType,
+                    values.carouselFrame,
+                    values.platform,
+                    values.initiative
                   )}
+                />
               </div>
-            )}
-          </Col>
-        </Row>
-        <Row>
-          <Col md="6" md-offset="3">
-            <div>
-              <Input
-                htmlFor="createName"
-                label="Creative name:"
-                type="text"
-                readOnly
-                id="m8-create-name"
-                value={createName(
-                  values.campaignCode,
-                  values.concept,
-                  values.creativePillar,
-                  values.creativeVariation,
-                  values.size,
-                  values.tech,
-                  values.language,
-                  values.creativeType,
-                  values.carouselFrame,
-                  values.platform,
-                  values.initiative
-                )}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="6" md-offset="3">
-            <div className="mui--text-center">
-              <Button variant="raised" onClick={handleSubmit} color="primary">
-                {values.btCopiedText}
-              </Button>
-            </div>
-            <div className="mui--text-center">
-              <Button
-                variant="raised"
-                color="primary"
-                onClick={handleReset}
-                disabled={!dirty || isSubmitting}
-              >
-                Reset
-              </Button>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </form>
+            </Col>
+          </Row>
+          <Row>
+            <Col md="6" md-offset="3">
+              <div className="mui--text-center">
+                <Button variant="raised" onClick={handleSubmit} color="primary">
+                  {values.btCopiedText}
+                </Button>
+              </div>
+              <div className="mui--text-center">
+                <Button
+                  variant="raised"
+                  color="primary"
+                  onClick={handleReset}
+                  disabled={!dirty || isSubmitting}
+                >
+                  Reset
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </form>
+    </div>
   );
 }
 
@@ -373,7 +395,7 @@ function CreativeFields(props) {
 
         if (!values.creativePillar) {
           errors.creativePillar = "Required";
-        } else if (!/^([a-z]){1,15}$/i.test(values.creativePillar)) {
+        } else if (!/^([a-z0-9%$]){1,15}$/i.test(values.creativePillar)) {
           errors.creativePillar = "Invalid characters on creative pillar";
         }
 

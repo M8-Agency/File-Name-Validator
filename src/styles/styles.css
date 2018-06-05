@@ -1,4 +1,45 @@
 /**
+ * Body CSS
+ */
+html,
+body {
+  height: 100%;
+}
+
+html,
+body,
+input,
+textarea,
+button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+/**
+ * Header CSS
+ */
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+header ul.mui-list--inline {
+  margin-bottom: 0;
+}
+
+header a {
+  color: white;
+}
+
+header table {
+  width: 100%;
+}
+
+/**
  * Layout CSS
  */
 #header {
@@ -25,16 +66,18 @@
 }
 
 .mui-container-fluid {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 #content-wrapper {
   min-height: 100%;
   overflow-x: hidden;
-  margin-left: 0px;
+  margin-left: 200px;
+  margin-right: 200px;
   transition: margin-left 0.2s;
 
   /* sticky bottom */
+  box-sizing: border-box;
   margin-bottom: -160px;
   padding-bottom: 160px;
 }
@@ -54,9 +97,9 @@
     transform: translate(200px);
   }
 
-  #content-wrapper {
+  /* #content-wrapper {
     margin-left: 200px;
-  }
+  } */
 
   #footer {
     margin-left: 200px;
@@ -129,4 +172,13 @@ input.error {
   border-color: red;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
     0 0 0 3px rgba(255, 0, 0, 0.1);
+}
+
+/**
+ * others
+ */
+
+.form-titles {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

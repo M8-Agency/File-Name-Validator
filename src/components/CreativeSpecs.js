@@ -39,51 +39,64 @@ class CreativeSpecs extends React.Component {
 
   render() {
     return (
-      <Container fluid={true}>
-        <div className="mui--text-center">
-          <h1>Creative Name Validator</h1>
+      <div>
+        <div id="content-wrapper" class="mui--text-center">
+          <div class="mui--appbar-height" />
+          <br />
+          <br />
+          <div class="mui--text-display2">Creative Name</div>
         </div>
-        <Row>
-          <Col md="2" md-offset="5">
-            <form>
-              <Select
-                label="Client:"
-                name="client"
-                value={this.state.client}
-                onChange={this.onChange}
-              >
-                {clients.map(function(option, i) {
-                  return (
-                    <Option key={i} value={option.value} label={option.label} />
-                  );
-                })}
-              </Select>
-
-              <Select
-                label="initiative"
-                name="initiative"
-                value={this.state.initiative}
-                onChange={this.onChange}
-              >
-                {initiatives.map(function(option, i) {
-                  return (
-                    <Option key={i} value={option.value} label={option.label} />
-                  );
-                })}
-              </Select>
-              <div className="mui--text-center">
-                <Button
-                  className="mui-btn mui-btn--raised"
-                  color="primary"
-                  onClick={this.onClick.bind(this)}
+        <Container fluid={true}>
+          <Row>
+            <Col md="2" md-offset="5">
+              <form>
+                <Select
+                  label="Client:"
+                  name="client"
+                  value={this.state.client}
+                  onChange={this.onChange}
                 >
-                  Get started
-                </Button>
-              </div>
-            </form>
-          </Col>
-        </Row>
-      </Container>
+                  {clients.map(function(option, i) {
+                    return (
+                      <Option
+                        key={i}
+                        value={option.value}
+                        label={option.label}
+                      />
+                    );
+                  })}
+                </Select>
+
+                <Select
+                  label="initiative"
+                  name="initiative"
+                  value={this.state.initiative}
+                  onChange={this.onChange}
+                >
+                  {initiatives.map(function(option, i) {
+                    return (
+                      <Option
+                        key={i}
+                        value={option.value}
+                        label={option.label}
+                      />
+                    );
+                  })}
+                </Select>
+                <div className="mui--text-center">
+                  <Button
+                    className="mui-btn mui-btn--raised"
+                    color="primary"
+                    onClick={this.onClick.bind(this)}
+                  >
+                    Get started
+                  </Button>
+                </div>
+              </form>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }

@@ -55,8 +55,7 @@ function createName(
 function validateClient(campaignCode, client) {
   let error = "";
   let value = campaignCode.split(".", 1)[0].toUpperCase();
-  console.log("Client:");
-  console.log(value);
+
   switch (client) {
     case "vfl":
       if (value !== "VFL" && value !== "VFD")

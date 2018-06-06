@@ -20,29 +20,54 @@ function CreativeForm(props) {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit,
     handleReset,
-    dirty
+    dirty,
+    submitForm
   } = props;
 
   const creativePillarList = getCreativePillar(values.client);
   const creativeTypeList = getCreativeType(values.initiative);
 
+  function copyName(event) {
+    event.preventDefault();
+    submitForm();
+
+    const signature = document.querySelector("#m8-create-name");
+    const range = document.createRange();
+    range.selectNode(signature);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    try {
+      document.execCommand("copy");
+      // values.btCopiedText = "Name copied!";
+      // values.btCopiedClass = "copied";
+    } catch (err) {
+      values.btCopiedClass = err;
+    }
+
+    window.getSelection().removeAllRanges();
+
+    // } else {
+    //   alert("no entro");
+    // }
+  }
+
   return (
     <div id="content-wrapper">
-      <div class="mui--text-center">
-        <div class="mui--appbar-height" />
+      <div className="mui--text-center">
+        <div className="mui--appbar-height" />
         <br />
         {values.client !== "aaa" && (
-          <div class="mui--text-subhead">
+          <div className="mui--text-subhead">
             Client code: {values.client.toUpperCase()}
           </div>
         )}
-        <div class="mui--text-subhead">
+        <div className="mui--text-subhead">
           Initiative: {values.initiative.toUpperCase()}
         </div>
       </div>
-      <form>
+      <form onSubmit={copyName}>
         <Container fluid={true}>
           <Row>
             <Col sm="6" md="6">
@@ -314,7 +339,6 @@ function CreativeForm(props) {
                   htmlFor="createName"
                   label="Creative name:"
                   type="text"
-                  readOnly
                   id="m8-create-name"
                   value={createName(
                     values.campaignCode,
@@ -336,7 +360,7 @@ function CreativeForm(props) {
           <Row>
             <Col md="6" md-offset="3">
               <div className="mui--text-center">
-                <Button variant="raised" onClick={handleSubmit} color="primary">
+                <Button variant="raised" type="submit" color="primary">
                   {values.btCopiedText}
                 </Button>
               </div>
@@ -377,7 +401,8 @@ function CreativeFields(props) {
         btCopiedClass: "",
         languageTemp: "",
         client: client,
-        initiative: initiative
+        initiative: initiative,
+        countError: 0
       }}
       validate={(values, props) => {
         let errors = {};
@@ -447,23 +472,9 @@ function CreativeFields(props) {
 
         return errors;
       }}
-      handleSubmit={(values, { setSubmitting }) => {
-        alert("AAA");
+      onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        const signature = document.querySelector("#m8-create-name");
-        const range = document.createRange();
-        range.selectNode(signature);
-        window.getSelection().addRange(range);
-
-        try {
-          document.execCommand("copy");
-          values.btCopiedText = "Name copied!";
-          values.btCopiedClass = "copied";
-        } catch (err) {
-          values.btCopiedClass = err;
-        }
-
-        window.getSelection().removeAllRanges();
+        console.log("al fin");
       }}
       render={({
         values,
@@ -471,8 +482,8 @@ function CreativeFields(props) {
         touched,
         handleChange,
         handleBlur,
-        handleSubmit,
-        isSubmitting
+        isSubmitting,
+        submitForm
       }) =>
         CreativeForm({
           values,
@@ -480,8 +491,8 @@ function CreativeFields(props) {
           touched,
           handleChange,
           handleBlur,
-          handleSubmit,
-          isSubmitting
+          isSubmitting,
+          submitForm
         })
       }
     />

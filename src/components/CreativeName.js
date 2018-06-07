@@ -11,6 +11,7 @@ import Select from "muicss/lib/react/select";
 import { getCreativePillar } from "../data/creativePillars";
 import { getCreativeType } from "../data/creativeTypes";
 import { platform } from "../data/platforms";
+import { validateLanguage } from "../data/iso_language";
 
 function CreativeForm(props) {
   const {
@@ -45,12 +46,7 @@ function CreativeForm(props) {
     } catch (err) {
       values.btCopiedClass = err;
     }
-
     window.getSelection().removeAllRanges();
-
-    // } else {
-    //   alert("no entro");
-    // }
   }
 
   return (
@@ -399,18 +395,15 @@ function CreativeFields(props) {
         platform: "",
         btCopiedText: "Copy name to clipboard!",
         btCopiedClass: "",
-        languageTemp: "",
         client: client,
-        initiative: initiative,
-        countError: 0
+        initiative: initiative
       }}
       validate={(values, props) => {
         let errors = {};
         if (!values.campaignCode) {
           errors.campaignCode = "Required";
         } else if (!/^([A-Z]){2,3}\.+([0-9]){4}$/i.test(values.campaignCode)) {
-          errors.campaignCode =
-            "Invalid characters or format. Example: VFL.7897";
+          errors.campaignCode = `Invalid characters or format. Example: ${client.toUpperCase()}.1001`;
         } else {
           errors.campaignCode = validateClient(
             values.campaignCode,
@@ -432,6 +425,20 @@ function CreativeFields(props) {
 
         if (!values.size) {
           errors.size = "Required";
+        } else if (
+          (values.creativeType === "audio" ||
+            values.creativeType === "video") &&
+          !/^([0-9])*(sec)$/i.test(values.size)
+        ) {
+          errors.size = `Invalid format for ${
+            values.creativeType
+          } creative type`;
+        } else if (
+          values.creativeType !== "audio" &&
+          values.creativeType !== "video" &&
+          !/^(([0-9]){1,3}x([0-9]){1,3}$)$/i.test(values.size)
+        ) {
+          errors.size = "This format is only for video/audio creative type";
         } else if (
           !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])*(sec)$/i.test(values.size)
         ) {
@@ -468,6 +475,8 @@ function CreativeFields(props) {
           errors.language = "Required";
         } else if (!/^([a-z]){3}(-([a-z]){3})*$/i.test(values.language)) {
           errors.language = "Invalid characters";
+        } else if (!validateLanguage(values.language)) {
+          errors.language = "Invalid language code";
         }
 
         return errors;

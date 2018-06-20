@@ -4,6 +4,8 @@ function getCreativePillar(client) {
       return creativePillarHTZ;
     case "vfl":
       return creativePillarVFL;
+    case "spr":
+      return creativePillarSPR;
     default:
       return creativePillarCPA;
   }
@@ -42,6 +44,15 @@ const creativePillarCPA = [
   { value: "BeMore", label: "Be More" },
   { value: "GetBetter", label: "Get Better" },
   { value: "GoPlaces", label: "Go Places" }
+];
+
+const creativePillarSPR = [
+  {},
+  { value: "rp", label: "Rate Plans" },
+  { value: "pdo", label: "Phones/Device Offers" },
+  { value: "ao", label: "Add-Ons" },
+  { value: "s", label: "Sponsorships" },
+  { value: "wte", label: "Web/Tele Exclusives" }
 ];
 
 export default { getCreativePillar };

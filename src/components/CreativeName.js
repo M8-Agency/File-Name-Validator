@@ -106,6 +106,24 @@ function CreativeForm(props) {
 
               <div>
                 <Input
+                  label="Language (Example: spa or spa-eng)"
+                  floatingLabel={true}
+                  invalid={errors.language && touched.language ? true : false}
+                  id="language"
+                  name="language"
+                  type="text"
+                  value={values.language}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.language &&
+                  touched.language && (
+                    <div className="input-feedback">{errors.language}</div>
+                  )}
+              </div>
+
+              <div>
+                <Input
                   label="Creative variation"
                   floatingLabel={true}
                   invalid={
@@ -125,24 +143,6 @@ function CreativeForm(props) {
                     <div className="input-feedback">
                       {errors.creativeVariation}
                     </div>
-                  )}
-              </div>
-
-              <div>
-                <Input
-                  label="Language (Example: spa or spa-eng)"
-                  floatingLabel={true}
-                  invalid={errors.language && touched.language ? true : false}
-                  id="language"
-                  name="language"
-                  type="text"
-                  value={values.language}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.language &&
-                  touched.language && (
-                    <div className="input-feedback">{errors.language}</div>
                   )}
               </div>
 
@@ -168,6 +168,46 @@ function CreativeForm(props) {
                       <div className="input-feedback">
                         {errors.carouselFrame}
                       </div>
+                    )}
+                </div>
+              )}
+              {values.initiative === "other" && (
+                <div>
+                  <Input
+                    label="Person"
+                    floatingLabel={true}
+                    invalid={errors.person && touched.person ? true : false}
+                    id="person"
+                    name="person"
+                    type="text"
+                    value={values.person}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.person &&
+                    touched.person && (
+                      <div className="input-feedback">{errors.person}</div>
+                    )}
+                </div>
+              )}
+              {values.initiative === "other" && (
+                <div>
+                  <Input
+                    label="Date"
+                    floatingLabel={false}
+                    invalid={errors.date && touched.date ? true : false}
+                    id="date"
+                    name="date"
+                    type="date"
+                    format="yyyy-MM-dd"
+                    value={values.date}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+
+                  {errors.date &&
+                    touched.date && (
+                      <div className="input-feedback">{errors.date}</div>
                     )}
                 </div>
               )}
@@ -234,42 +274,6 @@ function CreativeForm(props) {
               )}
 
               <div>
-                <Input
-                  label="Size/lenght (Example: 300x200 or 5sec)"
-                  floatingLabel={true}
-                  invalid={errors.size && touched.size ? true : false}
-                  id="size"
-                  name="size"
-                  type="text"
-                  value={values.size}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.size &&
-                  touched.size && (
-                    <div className="input-feedback">{errors.size}</div>
-                  )}
-              </div>
-
-              <div>
-                <Input
-                  label="Tech (optional)"
-                  floatingLabel={true}
-                  invalid={errors.tech && touched.tech ? true : false}
-                  id="tech"
-                  name="tech"
-                  type="text"
-                  value={values.tech}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.tech &&
-                  touched.tech && (
-                    <div className="input-feedback">{errors.tech}</div>
-                  )}
-              </div>
-
-              <div>
                 <Select
                   label="Creative type"
                   floatingLabel={true}
@@ -298,6 +302,42 @@ function CreativeForm(props) {
                     <div className="input-feedback">{errors.creativeType}</div>
                   )}
               </div>
+
+              <div>
+                <Input
+                  label="Size/lenght (Example: 300x200 or 5sec)"
+                  floatingLabel={true}
+                  invalid={errors.size && touched.size ? true : false}
+                  id="size"
+                  name="size"
+                  type="text"
+                  value={values.size}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.size &&
+                  touched.size && (
+                    <div className="input-feedback">{errors.size}</div>
+                  )}
+              </div>
+              <div>
+                <Input
+                  label="Tech (optional)"
+                  floatingLabel={true}
+                  invalid={errors.tech && touched.tech ? true : false}
+                  id="tech"
+                  name="tech"
+                  type="text"
+                  value={values.tech}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.tech &&
+                  touched.tech && (
+                    <div className="input-feedback">{errors.tech}</div>
+                  )}
+              </div>
+
               {values.initiative === "social" && (
                 <div>
                   <Select
@@ -309,6 +349,9 @@ function CreativeForm(props) {
                     value={values.platform}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    keyboard
+                    clearable
+                    disableOpenOnEnter
                   >
                     {platform.map(function(option, i) {
                       return (
@@ -323,6 +366,26 @@ function CreativeForm(props) {
                   {errors.platform &&
                     touched.platform && (
                       <div className="input-feedback">{errors.platform}</div>
+                    )}
+                </div>
+              )}
+
+              {values.initiative === "other" && (
+                <div>
+                  <Input
+                    label="Version"
+                    floatingLabel={true}
+                    invalid={errors.version && touched.version ? true : false}
+                    id="version"
+                    name="version"
+                    type="text"
+                    value={values.version}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.version &&
+                    touched.version && (
+                      <div className="input-feedback">{errors.version}</div>
                     )}
                 </div>
               )}
@@ -347,6 +410,9 @@ function CreativeForm(props) {
                     values.creativeType,
                     values.carouselFrame,
                     values.platform,
+                    values.date,
+                    values.person,
+                    values.version,
                     values.initiative
                   )}
                 />
@@ -396,7 +462,10 @@ function CreativeFields(props) {
         btCopiedText: "Copy name to clipboard!",
         btCopiedClass: "",
         client: client,
-        initiative: initiative
+        initiative: initiative,
+        date: "",
+        person: "",
+        version: ""
       }}
       validate={(values, props) => {
         let errors = {};
@@ -428,7 +497,7 @@ function CreativeFields(props) {
         } else if (
           (values.creativeType === "audio" ||
             values.creativeType === "video") &&
-          !/^([0-9])*(sec)$/i.test(values.size)
+          !/^([0-9])+(sec)$/i.test(values.size)
         ) {
           errors.size = `Invalid format for ${
             values.creativeType
@@ -440,13 +509,23 @@ function CreativeFields(props) {
         ) {
           errors.size = "This format is only for video/audio creative type";
         } else if (
-          !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])*(sec)$/i.test(values.size)
+          !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])+(sec)$/i.test(values.size)
         ) {
           errors.size = "Invalid characters";
         }
 
         if (!values.creativeVariation) {
           errors.creativeVariation = "Required";
+        } else if (
+          values.client === "htz" &&
+          (values.creativePillar.includes("%") ||
+            values.creativePillar.includes("$")) &&
+          !/^(\d)+$/i.test(values.creativeVariation)
+        ) {
+          errors.creativeVariation =
+            "Invalid characters, for the creative pillar selected it's only accept numbers";
+
+          /* "Invalid characters, for the creative pillar selected it's only accept numbers"; */
         } else if (!/([A-Za-z0-9])*/i.test(values.creativeVariation)) {
           errors.creativeVariation = "Invalid characters";
         }
@@ -479,6 +558,22 @@ function CreativeFields(props) {
           errors.language = "Invalid language code";
         }
 
+        if (!values.date) {
+          errors.date = "Required";
+        }
+
+        if (!values.person) {
+          errors.person = "Required";
+        } else if (!/^([a-z]){1,15}$/i.test(values.person)) {
+          errors.person = "Invalid characters";
+        }
+
+        if (!values.version) {
+          errors.version = "Required";
+        } else if (!/^(\d)+$/i.test(values.version)) {
+          errors.version = "Invalid characters, only numbers allowed";
+        }
+
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -492,7 +587,8 @@ function CreativeFields(props) {
         handleChange,
         handleBlur,
         isSubmitting,
-        submitForm
+        submitForm,
+        handleDateChange
       }) =>
         CreativeForm({
           values,
@@ -501,7 +597,8 @@ function CreativeFields(props) {
           handleChange,
           handleBlur,
           isSubmitting,
-          submitForm
+          submitForm,
+          handleDateChange
         })
       }
     />

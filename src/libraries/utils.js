@@ -55,31 +55,5 @@ function createName(
   return name;
 }
 
-function validateClient(campaignCode, client) {
-  let error = "";
-  let value = campaignCode.split(".", 1)[0].toUpperCase();
-
-  switch (client) {
-    case "vfl":
-      if (value !== "VFL" && value !== "VFD")
-        error =
-          "You selected Visit Florida, the client code does not match. It should be VFL or VFD ";
-      break;
-    case "cpa":
-      if (value !== "CPA")
-        error =
-          "You selected Copa Airline, the client code does not match. It should be CPA ";
-      break;
-    case "htz":
-      if (value !== "HTZ")
-        error =
-          "You selected Hertz, the client code does not match. It should be HTZ ";
-      break;
-    default:
-      break;
-  }
-  return error;
-}
-
 export default createName;
-export { validateClient, createName };
+export { createName };

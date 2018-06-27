@@ -27,32 +27,32 @@ const creativePillarHTZ = [
 
 const creativePillarVFL = [
   {},
-  { value: "WinterSunseekers", label: "Winter Sunseekers" },
-  { value: "ImpulseGetaways", label: "Impulse Getaways" },
-  { value: "FamilyMemoryMakers", label: "Family Memory Makers" },
-  { value: "AdventureSeekers", label: "Adventure Seekers" },
-  { value: "Experienceseekers", label: "Experience seekers" },
-  { value: "Fall", label: "Fall" },
-  { value: "Spring", label: "Spring" },
-  { value: "Summer", label: "Summer" },
-  { value: "International", label: "International" },
-  { value: "Partner", label: "Partner" }
+  { value: "wintersunseekers", label: "Winter Sunseekers" },
+  { value: "impulsegetaways", label: "Impulse Getaways" },
+  { value: "familymemorymakers", label: "Family Memory Makers" },
+  { value: "adventureseekers", label: "Adventure Seekers" },
+  { value: "experienceseekers", label: "Experience seekers" },
+  { value: "fall", label: "Fall" },
+  { value: "spring", label: "Spring" },
+  { value: "summer", label: "Summer" },
+  { value: "international", label: "International" },
+  { value: "partner", label: "Partner" }
 ];
 
 const creativePillarCPA = [
   {},
-  { value: "BeMore", label: "Be More" },
-  { value: "GetBetter", label: "Get Better" },
-  { value: "GoPlaces", label: "Go Places" }
+  { value: "bm", label: "Be More" },
+  { value: "gb", label: "Get Better" },
+  { value: "gp", label: "Go Places" }
 ];
 
 const creativePillarSPR = [
   {},
-  { value: "rp", label: "Rate Plans" },
-  { value: "pdo", label: "Phones/Device Offers" },
-  { value: "ao", label: "Add-Ons" },
-  { value: "s", label: "Sponsorships" },
-  { value: "wte", label: "Web/Tele Exclusives" }
+  { value: "rateplans", label: "Rate Plans" },
+  { value: "phonesdeviceoffers", label: "Phones/Device Offers" },
+  { value: "addons", label: "Add-Ons" },
+  { value: "sponsorships", label: "Sponsorships" },
+  { value: "webteleexclusives", label: "Web/Tele Exclusives" }
 ];
 
 export default { getCreativePillar };

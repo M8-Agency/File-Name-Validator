@@ -1,9 +1,4 @@
-function validateLanguage(lang_values) {
-  const _values = lang_values.split("-");
-  return !_values.some(lang => !platform.find(value => value.code_3 === lang));
-}
-
-const platform = [
+let lag_list = [
   {
     code_3: "aar"
   },
@@ -558,4 +553,4 @@ const platform = [
   }
 ];
 
-export { validateLanguage };
+export default lag_list;

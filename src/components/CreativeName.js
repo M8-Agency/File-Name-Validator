@@ -5,13 +5,13 @@ import Col from "muicss/lib/react/col";
 import Input from "muicss/lib/react/input";
 import Button from "muicss/lib/react/button";
 import { Formik } from "formik";
-import { createName, validateClient } from "../utils/validator";
+import * as validations from "../libraries/validations";
+import createName from "../libraries/utils";
 import Option from "muicss/lib/react/option";
 import Select from "muicss/lib/react/select";
 import { getCreativePillar } from "../data/creativePillars";
 import { getCreativeType } from "../data/creativeTypes";
 import { platform } from "../data/platforms";
-import { validateLanguage } from "../data/iso_language";
 
 function CreativeForm(props) {
   const {
@@ -31,6 +31,10 @@ function CreativeForm(props) {
 
   function copyName(event) {
     event.preventDefault();
+    // Defaults Values, when submiting
+    if (!values.creativeVariation) {
+      values.creativeVariation = "0";
+    }
     submitForm();
 
     const signature = document.querySelector("#m8-create-name");
@@ -88,7 +92,7 @@ function CreativeForm(props) {
               </div>
               <div>
                 <Input
-                  label="Concept"
+                  label="Creative concept"
                   floatingLabel={true}
                   id="concept"
                   name="concept"
@@ -134,6 +138,7 @@ function CreativeForm(props) {
                   id="creativeVariation"
                   name="creativeVariation"
                   type="text"
+                  defaultValue="sssss0"
                   value={values.creativeVariation}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -149,7 +154,7 @@ function CreativeForm(props) {
               {values.initiative === "social" && (
                 <div>
                   <Input
-                    label="Carousel frame"
+                    label="Carousel frame (if required)"
                     floatingLabel={true}
                     invalid={
                       errors.carouselFrame && touched.carouselFrame
@@ -469,110 +474,62 @@ function CreativeFields(props) {
       }}
       validate={(values, props) => {
         let errors = {};
-        if (!values.campaignCode) {
-          errors.campaignCode = "Required";
-        } else if (!/^([A-Z]){2,3}\.+([0-9]){4}$/i.test(values.campaignCode)) {
-          errors.campaignCode = `Invalid characters or format. Example: ${client.toUpperCase()}.1001`;
-        } else {
-          errors.campaignCode = validateClient(
-            values.campaignCode,
-            values.client
-          );
-        }
 
-        if (!values.creativePillar) {
-          errors.creativePillar = "Required";
-        } else if (!/^([a-z0-9%$]){1,15}$/i.test(values.creativePillar)) {
-          errors.creativePillar = "Invalid characters on creative pillar";
-        }
+        errors.campaignCode = validations.validateCampaign(
+          values.campaignCode,
+          client
+        );
 
-        if (!values.concept) {
-          errors.concept = "Required";
-        } else if (!/^([a-z]){1,15}$/i.test(values.concept)) {
-          errors.concept = "Invalid characters on concept";
-        }
+        errors.creativePillar = validations.validateCreativePillar(
+          values.creativePillar
+        );
 
-        if (!values.size) {
-          errors.size = "Required";
-        } else if (
-          (values.creativeType === "audio" ||
-            values.creativeType === "video") &&
-          !/^([0-9])+(sec)$/i.test(values.size)
-        ) {
-          errors.size = `Invalid format for ${
+        errors.concept = validations.validateConcept(values.concept);
+
+        errors.size = validations.validateSize(
+          values.size,
+          values.creativeType
+        );
+
+        errors.creativeVariation = validations.validateCreativeVariation(
+          values.creativeVariation,
+          values.creativePillar,
+          values.client
+        );
+
+        errors.tech = validations.validateAlphanumeric(values.tech);
+
+        errors.carouselFrame = validations.validateAlphanumeric(
+          values.carouselFrame
+        );
+
+        errors.platform = validations.validateRequiredAlphanumeric(
+          values.platform
+        );
+
+        errors.creativeType = validations.validateCreativeType(
+          values.creativeType
+        );
+
+        errors.language = validations.validateLanguage(values.language);
+
+        if (
+          ["image+text", "email", "custom", "custom"].indexOf(
             values.creativeType
-          } creative type`;
-        } else if (
-          values.creativeType !== "audio" &&
-          values.creativeType !== "video" &&
-          !/^(([0-9]){1,3}x([0-9]){1,3}$)$/i.test(values.size)
+          ) >= 0
         ) {
-          errors.size = "This format is only for video/audio creative type";
-        } else if (
-          !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])+(sec)$/i.test(values.size)
-        ) {
-          errors.size = "Invalid characters";
+          if (!values.size) {
+            values.size = "1x1";
+          }
+        } else if (["deck"].indexOf(values.creativeType) >= 0) {
+          if (!values.size) {
+            values.size = "0";
+          }
         }
 
-        if (!values.creativeVariation) {
-          errors.creativeVariation = "Required";
-        } else if (
-          values.client === "htz" &&
-          (values.creativePillar.includes("%") ||
-            values.creativePillar.includes("$")) &&
-          !/^(\d)+$/i.test(values.creativeVariation)
-        ) {
-          errors.creativeVariation =
-            "Invalid characters, for the creative pillar selected it's only accept numbers";
-
-          /* "Invalid characters, for the creative pillar selected it's only accept numbers"; */
-        } else if (!/([A-Za-z0-9])*/i.test(values.creativeVariation)) {
-          errors.creativeVariation = "Invalid characters";
-        }
-
-        if (!/([A-Za-z0-9])*/i.test(values.tech)) {
-          errors.tech = "Invalid characters";
-        }
-
-        if (!/([A-Za-z0-9])*/i.test(values.carouselFrame)) {
-          errors.carouselFrame = "Invalid characters";
-        }
-
-        if (!values.platform) {
-          errors.platform = "Required";
-        } else if (!/([A-Za-z0-9])*/i.test(values.platform)) {
-          errors.platform = "Invalid characters";
-        }
-
-        if (!values.creativeType) {
-          errors.creativeType = "Required";
-        } else if (!/([A-Za-z0-9])*/i.test(values.creativeType)) {
-          errors.creativeType = "Invalid characters";
-        }
-
-        if (!values.language) {
-          errors.language = "Required";
-        } else if (!/^([a-z]){3}(-([a-z]){3})*$/i.test(values.language)) {
-          errors.language = "Invalid characters";
-        } else if (!validateLanguage(values.language)) {
-          errors.language = "Invalid language code";
-        }
-
-        if (!values.date) {
-          errors.date = "Required";
-        }
-
-        if (!values.person) {
-          errors.person = "Required";
-        } else if (!/^([a-z]){1,15}$/i.test(values.person)) {
-          errors.person = "Invalid characters";
-        }
-
-        if (!values.version) {
-          errors.version = "Required";
-        } else if (!/^(\d)+$/i.test(values.version)) {
-          errors.version = "Invalid characters, only numbers allowed";
-        }
+        errors.date = validations.validateRequired(values.date);
+        errors.person = validations.validateAlphabetic(values.person, true);
+        errors.version = validations.validateNumbers(values.version, true);
 
         return errors;
       }}

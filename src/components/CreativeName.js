@@ -4,7 +4,6 @@ import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import Input from "muicss/lib/react/input";
 import Button from "muicss/lib/react/button";
-import { Formik } from "formik";
 import * as validations from "../libraries/validations";
 import * as utils from "../libraries/utils";
 import createName from "../libraries/utils";
@@ -62,6 +61,8 @@ class CreativeForm extends React.Component {
     };
 
     this.state = initialState;
+
+    console.log(this.state);
 
     this.onChange = this.onChange.bind(this);
     this.onReset = this.onReset.bind(this);
@@ -187,7 +188,7 @@ class CreativeForm extends React.Component {
     errors.creativeVariation = validations.validateCreativeVariation(
       this.state.values.creativeVariation,
       this.state.values.creativePillar,
-      this.state.values.client
+      this.state.client
     );
 
     errors.tech = validations.validateAlphanumeric(this.state.values.tech);
@@ -271,7 +272,7 @@ class CreativeForm extends React.Component {
         <div className="mui--text-center">
           <div className="mui--appbar-height" />
           <br />
-          {this.state.values.client !== "aaa" && (
+          {this.state.client !== "aaa" && (
             <div className="mui--text-subhead">
               Client code: {this.state.client.toUpperCase()}
             </div>
@@ -382,7 +383,7 @@ class CreativeForm extends React.Component {
                     )}
                 </div>
 
-                {this.state.values.initiative === "social" && (
+                {this.state.initiative === "social" && (
                   <div>
                     <Input
                       label="Carousel frame (if required)"
@@ -408,7 +409,7 @@ class CreativeForm extends React.Component {
                       )}
                   </div>
                 )}
-                {this.state.values.initiative === "other" && (
+                {this.state.initiative === "other" && (
                   <div>
                     <Input
                       label="Person"
@@ -433,7 +434,7 @@ class CreativeForm extends React.Component {
                       )}
                   </div>
                 )}
-                {this.state.values.initiative === "other" && (
+                {this.state.initiative === "other" && (
                   <div>
                     <Input
                       label="Date"
@@ -462,7 +463,7 @@ class CreativeForm extends React.Component {
                 )}
               </Col>
               <Col sm="6" md="6">
-                {this.state.values.client === "other" ? (
+                {this.state.client === "other" ? (
                   <div>
                     <Input
                       floatingLabel={true}
@@ -612,7 +613,7 @@ class CreativeForm extends React.Component {
                     )}
                 </div>
 
-                {this.state.values.initiative === "social" && (
+                {this.state.initiative === "social" && (
                   <div>
                     <Select
                       label="Platform"
@@ -651,7 +652,7 @@ class CreativeForm extends React.Component {
                   </div>
                 )}
 
-                {this.state.values.initiative === "other" && (
+                {this.state.initiative === "other" && (
                   <div>
                     <Input
                       label="Version"
@@ -700,7 +701,7 @@ class CreativeForm extends React.Component {
                       this.state.values.date,
                       this.state.values.person,
                       this.state.values.version,
-                      this.state.values.initiative
+                      this.state.initiative
                     )}
                   />
                 </div>

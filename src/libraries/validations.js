@@ -68,6 +68,8 @@ function validateConcept(concept) {
 function validateSize(size, creativeType) {
   if (!size) {
     return "Required";
+  } else if ((creativeType == "deck") & (size != "0")) {
+    return "This format is only for deck creative type";
   } else if (
     (creativeType === "audio" || creativeType === "video") &&
     !/^([0-9])+(sec)$/i.test(size)
@@ -131,7 +133,7 @@ function validateLanguage(language) {
     return "Required";
   } else if (!/^([a-z]){3}(-([a-z]){3})*$/i.test(language)) {
     return "Invalid characters";
-  } else if (!validListLanguage(language)) {
+  } else if (!validListLanguage(language.toLowerCase())) {
     return "Invalid language code";
   }
 }

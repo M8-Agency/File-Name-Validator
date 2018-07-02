@@ -55,5 +55,16 @@ function createName(
   return name;
 }
 
+function findError(objectList) {
+  for (let key in objectList) {
+    let _value = objectList[key];
+    console.log(_value);
+    if (_value != null && _value != undefined && _value != "") {
+      return true;
+    }
+  }
+  return false;
+}
+
 export default createName;
-export { createName };
+export { createName, findError };

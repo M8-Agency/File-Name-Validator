@@ -182,3 +182,19 @@ input.error {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
+._hidden {
+  visibility: hidden;
+}
+
+.pickerDiv {
+  padding: 7px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.MuiFormControl-root-2 {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 0.5rem;
+}

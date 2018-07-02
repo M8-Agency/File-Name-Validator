@@ -12,6 +12,45 @@ import Select from "muicss/lib/react/select";
 import { getCreativePillar } from "../data/creativePillars";
 import { getCreativeType } from "../data/creativeTypes";
 import { platform } from "../data/platforms";
+import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+import DatePicker from "material-ui-pickers/DatePicker";
+import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
+import format from "date-fns/format";
+
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+import blue from "@material-ui/core/colors/blue";
+
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: blue.A200
+      }
+    },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        // backgroundColor: blue.A200,
+        // color: "white"
+      }
+    },
+    MuiPickersDay: {
+      day: {
+        color: blue.A700
+      },
+      selected: {
+        backgroundColor: blue["400"]
+      },
+      current: {
+        color: blue["900"]
+      }
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: blue["400"]
+      }
+    }
+  }
+});
 
 class CreativeForm extends React.Component {
   constructor(props) {
@@ -28,6 +67,7 @@ class CreativeForm extends React.Component {
       creativeType: "",
       carouselFrame: "",
       platform: "",
+      dateDisplay: new Date(),
       date: "",
       person: "",
       version: ""
@@ -57,6 +97,7 @@ class CreativeForm extends React.Component {
       isSubmitting: false,
       dirty: false,
       hasErrors: true,
+      nameVisible: false,
       btnText: "Copy name to clipboard!"
     };
 
@@ -71,8 +112,23 @@ class CreativeForm extends React.Component {
     this.validate = this.validate.bind(this);
     this.defaultValues = this.defaultValues.bind(this);
     this.allTouched = this.allTouched.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
+  handleDateChange = date => {
+    let _date = format(date, "YYYY-MM-DD", { locale: this.locale });
+    this.setState(state => ({
+      values: { ...state.values, date: _date }
+    }));
+
+    this.setState(state => ({
+      values: { ...state.values, dateDisplay: date }
+    }));
+
+    this.setState(state => ({
+      touched: { ...state.touched, date: true }
+    }));
+  };
   onChange(e) {
     const target = e.target;
     const name = target.name;
@@ -109,6 +165,8 @@ class CreativeForm extends React.Component {
 
     if (!utils.findError) {
       this.setState({ hasErrors: false });
+    } else {
+      this.setState({ hasErrors: true });
     }
 
     this.setState({ dirty: true });
@@ -157,6 +215,7 @@ class CreativeForm extends React.Component {
 
       try {
         if (!utils.findError(this.state.errors)) {
+          this.setState({ nameVisible: true });
           console.log("entro");
           document.execCommand("copy");
           this.setState({ btnText: "Name copied!" });
@@ -229,39 +288,54 @@ class CreativeForm extends React.Component {
       ) >= 0
     ) {
       if (!this.state.values.size) {
+        this.setState(state => ({
+          errors: { ...state.errors, size: null }
+        }));
         this.setState({
           values: { ...this.state.values, size: "1x1" }
         });
         this.setState(state => ({
           touched: { ...state.touched, size: true }
         }));
-        this.setState(state => ({
-          errors: { ...state.errors, size: null }
-        }));
       }
     } else if (["deck", "page"].indexOf(this.state.values.creativeType) >= 0) {
       if (!this.state.values.size) {
+        this.setState(state => ({
+          errors: { ...state.errors, size: null }
+        }));
         this.setState({
           values: { ...this.state.values, size: "0" }
         });
         this.setState(state => ({
           touched: { ...state.touched, size: true }
         }));
-        this.setState(state => ({
-          errors: { ...state.errors, size: null }
-        }));
       }
     }
 
     if (!this.state.values.creativeVariation) {
+      this.setState(state => ({
+        errors: { ...state.errors, creativeVariation: null }
+      }));
       this.setState({
         values: { ...this.state.values, creativeVariation: "0" }
       });
       this.setState(state => ({
         touched: { ...state.touched, creativeVariation: true }
       }));
+    }
+
+    if (!this.state.values.date) {
+      let _date = format(this.state.values.dateDisplay, "YYYY-MM-DD", {
+        locale: this.locale
+      });
       this.setState(state => ({
         errors: { ...state.errors, creativeVariation: null }
+      }));
+      this.setState({
+        values: { ...this.state.values, date: _date }
+      });
+      this.setState(state => ({
+        touched: { ...state.touched, creativeVariation: true }
       }));
     }
   }
@@ -436,29 +510,21 @@ class CreativeForm extends React.Component {
                 )}
                 {this.state.initiative === "other" && (
                   <div>
-                    <Input
-                      label="Date"
-                      floatingLabel={false}
-                      invalid={
-                        this.state.errors.date && this.state.touched.date
-                          ? true
-                          : false
-                      }
-                      id="date"
-                      name="date"
-                      type="date"
-                      format="yyyy-MM-dd"
-                      value={this.state.values.date}
-                      onChange={this.onChange}
-                      onBlur={this.onBlur}
-                    />
-
-                    {this.state.errors.date &&
-                      this.state.touched.date && (
-                        <div className="input-feedback">
-                          {this.state.errors.date}
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <MuiThemeProvider theme={materialTheme}>
+                        <div>
+                          <DatePicker
+                            className="pickerDiv"
+                            value={this.state.values.dateDisplay}
+                            onChange={this.handleDateChange}
+                            label="Date"
+                            format="YYYY-MM-DD"
+                            id="date"
+                            name="date"
+                          />
                         </div>
-                      )}
+                      </MuiThemeProvider>
+                    </MuiPickersUtilsProvider>
                   </div>
                 )}
               </Col>
@@ -681,12 +747,15 @@ class CreativeForm extends React.Component {
             </Row>
             <Row>
               <Col md="8" md-offset="2">
+                {/* <div className={!this.state.nameVisible && "_hidden"}> */}
                 <div>
+                  <br />
                   <Input
                     htmlFor="createName"
                     label="Creative name:"
                     type="text"
                     id="m8-create-name"
+                    onClick={this.onSubmit}
                     value={createName(
                       this.state.values.campaignCode,
                       this.state.values.concept,

@@ -36,7 +36,7 @@ function createName(
       _carouselFrame +
       (initiative === "social" ? "_" : "")
     : "";
-  const _version = version && `${version}_`;
+  const _version = version && `_${version}_`;
   const _person = person && `${person.toLowerCase()}_`;
   const _date = date && `${date}`;
 

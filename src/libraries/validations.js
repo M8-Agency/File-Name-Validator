@@ -66,10 +66,11 @@ function validateConcept(concept) {
 }
 
 function validateSize(size, creativeType) {
+  console.log(`size ${size}`);
   if (!size) {
     return "Required";
-  } else if ((creativeType == "deck") & (size != "0")) {
-    return "This format is only for deck creative type";
+  } else if ((creativeType == "deck" || creativeType == "page") && size != 0) {
+    return "For Deck or Page creative type the size is 0";
   } else if (
     (creativeType === "audio" || creativeType === "video") &&
     !/^([0-9])+(sec)$/i.test(size)
@@ -78,18 +79,25 @@ function validateSize(size, creativeType) {
   } else if (
     creativeType !== "audio" &&
     creativeType !== "video" &&
+    creativeType !== "deck" &&
+    creativeType !== "page" &&
     !/^(([0-9]){1,3}x([0-9]){1,3}$)$/i.test(size)
   ) {
-    return "This format is only for video/audio creative type";
-  } else if (!/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])+(sec)$/i.test(size)) {
+    return "Invalid format";
+  } else if (
+    creativeType !== "deck" &&
+    creativeType !== "page" &&
+    !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])+(sec)$/i.test(size)
+  ) {
     return "Invalid characters";
   }
 }
 
 function validateCreativeVariation(creativeVariation, creativePillar, client) {
-  if (!creativeVariation) {
-    return "Required";
-  } else if (
+  // if (!creativeVariation) {
+  //   return "Required";
+  // } else
+  if (
     client === "htz" &&
     (creativePillar.includes("%") || creativePillar.includes("$")) &&
     !/^(\d)+$/i.test(creativeVariation)

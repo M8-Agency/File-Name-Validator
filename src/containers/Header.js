@@ -15,9 +15,9 @@ class Header extends Component {
                     <li>
                       <Link to={"/"}>Home</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link to={"/"}>Help</Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </td>
               </tr>

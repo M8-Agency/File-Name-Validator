@@ -3,12 +3,19 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import CreativeSpecs from "../components/CreativeSpecs";
 import { Creative } from "../components/CreativeName";
 import Header from "../containers/Header";
-
-import NCreative from "../components/Creative";
 import "../styles/styles.css";
 
 function NoMatch() {
-  return <div>WHOOPS!</div>;
+  return (
+    <div>
+      <div id="content-wrapper" class="mui--text-center">
+        <div class="mui--appbar-height" />
+        <br />
+        <br />
+        <div>Sorry, we couldn’t find that page</div>
+      </div>
+    </div>
+  );
 }
 
 class App extends Component {
@@ -20,8 +27,6 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={CreativeSpecs} />
             <Route path="/creative/" component={Creative} />
-            <Route path="/ncreative/" component={NCreative} />
-
             <Route component={NoMatch} />
           </Switch>
         </React.Fragment>

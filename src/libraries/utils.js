@@ -59,7 +59,7 @@ function findError(objectList) {
   for (let key in objectList) {
     let _value = objectList[key];
     console.log(_value);
-    if (_value != null && _value != undefined && _value != "") {
+    if (_value !== null && _value !== undefined && _value !== "") {
       return true;
     }
   }

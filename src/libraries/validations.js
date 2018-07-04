@@ -31,7 +31,6 @@ function validateClient(campaignCode, client) {
   }
   return error;
 }
-
 function validateCampaign(campaignCode, client) {
   let _error = null;
   if (!campaignCode) {
@@ -44,7 +43,6 @@ function validateCampaign(campaignCode, client) {
 
   return _error;
 }
-
 function validateCreativePillar(creativePillar) {
   let _error = null;
   if (!creativePillar) {
@@ -54,22 +52,14 @@ function validateCreativePillar(creativePillar) {
   }
   return _error;
 }
-
-function validateConcept(concept) {
-  let _error = null;
-  if (!concept) {
-    _error = "Required";
-  } else if (!/^([a-z]){1,15}$/i.test(concept)) {
-    _error = "Invalid characters on concept";
-  }
-  return _error;
-}
-
 function validateSize(size, creativeType) {
   console.log(`size ${size}`);
   if (!size) {
     return "Required";
-  } else if ((creativeType == "deck" || creativeType == "page") && size != 0) {
+  } else if (
+    (creativeType === "deck" || creativeType === "page") &&
+    size !== 0
+  ) {
     return "For Deck or Page creative type the size is 0";
   } else if (
     (creativeType === "audio" || creativeType === "video") &&
@@ -92,11 +82,7 @@ function validateSize(size, creativeType) {
     return "Invalid characters";
   }
 }
-
 function validateCreativeVariation(creativeVariation, creativePillar, client) {
-  // if (!creativeVariation) {
-  //   return "Required";
-  // } else
   if (
     client === "htz" &&
     (creativePillar.includes("%") || creativePillar.includes("$")) &&
@@ -108,50 +94,31 @@ function validateCreativeVariation(creativeVariation, creativePillar, client) {
     return "Invalid characters";
   }
 }
-
-function validateAlphanumeric(value) {
-  if (!/([A-Za-z0-9])*/i.test(value)) {
-    return "Invalid characters";
-  }
-}
-
-function validateRequiredAlphanumeric(value) {
-  if (!value) {
+function validateAlphanumeric(value, required) {
+  if (required && !value) {
     return "Required";
   } else if (!/([A-Za-z0-9])*/i.test(value)) {
     return "Invalid characters";
   }
 }
-
-function validateCreativeType(creativeType) {
-  if (!creativeType) {
-    return "Required";
-  } else if (!/([A-Za-z0-9])*/i.test(creativeType)) {
-    return "Invalid characters";
-  }
-}
-
 function validListLanguage(lang_values) {
   const _values = lang_values.split("-");
   return !_values.some(lang => !lag_list.find(value => value.code_3 === lang));
 }
-
 function validateLanguage(language) {
   if (!language) {
     return "Required";
   } else if (!/^([a-z]){3}(-([a-z]){3})*$/i.test(language)) {
-    return "Invalid characters";
+    return "Invalid format";
   } else if (!validListLanguage(language.toLowerCase())) {
     return "Invalid language code";
   }
 }
-
 function validateRequired(value) {
   if (!value) {
     return "Required";
   }
 }
-
 function validateNumbers(value, required) {
   if (!value && required) {
     return "Required";
@@ -162,8 +129,8 @@ function validateNumbers(value, required) {
 function validateAlphabetic(value, required) {
   if (!value && required) {
     return "Required";
-  } else if (!/^([a-z]){1,15}$/i.test(value)) {
-    return "Invalid characters";
+  } else if (!/^([A-Za-z]){1,15}$/i.test(value)) {
+    return "Invalid characters, only alphabetic characters";
   }
 }
 
@@ -171,12 +138,9 @@ export {
   validateClient,
   validateCampaign,
   validateCreativePillar,
-  validateConcept,
   validateSize,
   validateCreativeVariation,
   validateAlphanumeric,
-  validateRequiredAlphanumeric,
-  validateCreativeType,
   validateLanguage,
   validateRequired,
   validateNumbers,

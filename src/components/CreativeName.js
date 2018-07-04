@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
@@ -97,14 +98,10 @@ class CreativeForm extends React.Component {
       isSubmitting: false,
       dirty: false,
       hasErrors: true,
-      nameVisible: false,
       btnText: "Copy name to clipboard!"
     };
 
     this.state = initialState;
-
-    console.log(this.state);
-
     this.onChange = this.onChange.bind(this);
     this.onReset = this.onReset.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -129,6 +126,7 @@ class CreativeForm extends React.Component {
       touched: { ...state.touched, date: true }
     }));
   };
+
   onChange(e) {
     const target = e.target;
     const name = target.name;
@@ -145,31 +143,27 @@ class CreativeForm extends React.Component {
         this.setState(state => ({
           errors: { ...state.errors, [name]: _e[name] }
         }));
-        this.defaultValues();
       }
     );
+    this.resetSubmit();
   }
 
   onBlur(e) {
     const target = e.target;
     const name = target.name;
-
-    this.defaultValues();
-
     const _e = this.validate();
-    this.setState({ errors: _e });
 
+    this.setState({ errors: _e });
     this.setState(state => ({
       touched: { ...state.touched, [name]: true }
     }));
+    this.defaultValues();
 
     if (!utils.findError) {
       this.setState({ hasErrors: false });
     } else {
       this.setState({ hasErrors: true });
     }
-
-    this.setState({ dirty: true });
   }
 
   allTouched() {
@@ -192,20 +186,25 @@ class CreativeForm extends React.Component {
     this.setState({ touched: _touched });
   }
 
+  resetSubmit() {
+    if (this.state.isSubmitting) {
+      this.setState({ isSubmitting: false });
+      this.setState({ btnText: "Copy name to clipboard!" });
+      this.setState({ hasErrors: true });
+    }
+  }
+
   onReset(e) {
-    this.props.navigation.navigate("/");
+    e.preventDefault();
+    document.location.href = "/";
   }
 
   onSubmit(e) {
     e.preventDefault();
-
     this.defaultValues();
-
     const _e = this.validate();
     this.setState({ errors: _e }, function() {
       this.allTouched();
-
-      this.setState({ isSubmitting: true });
 
       const signature = document.querySelector("#m8-create-name");
       const range = document.createRange();
@@ -215,9 +214,8 @@ class CreativeForm extends React.Component {
 
       try {
         if (!utils.findError(this.state.errors)) {
-          this.setState({ nameVisible: true });
-          console.log("entro");
           document.execCommand("copy");
+          this.setState({ isSubmitting: true });
           this.setState({ btnText: "Name copied!" });
           this.setState({ hasErrors: false });
         }
@@ -237,7 +235,10 @@ class CreativeForm extends React.Component {
       this.state.values.creativePillar
     );
 
-    errors.concept = validations.validateConcept(this.state.values.concept);
+    errors.concept = validations.validateAlphabetic(
+      this.state.values.concept,
+      true
+    );
 
     errors.size = validations.validateSize(
       this.state.values.size,
@@ -250,23 +251,29 @@ class CreativeForm extends React.Component {
       this.state.client
     );
 
-    errors.tech = validations.validateAlphanumeric(this.state.values.tech);
+    errors.tech = validations.validateAlphanumeric(
+      this.state.values.tech,
+      false
+    );
 
-    errors.creativeType = validations.validateCreativeType(
-      this.state.values.creativeType
+    errors.creativeType = validations.validateAlphanumeric(
+      this.state.values.creativeType,
+      true
     );
 
     errors.language = validations.validateLanguage(this.state.values.language);
 
-    if (this.state.initiative == "social") {
+    if (this.state.initiative === "social") {
       errors.carouselFrame = validations.validateAlphanumeric(
-        this.state.values.carouselFrame
+        this.state.values.carouselFrame,
+        false
       );
 
-      errors.platform = validations.validateRequiredAlphanumeric(
-        this.state.values.platform
+      errors.platform = validations.validateAlphanumeric(
+        this.state.values.platform,
+        true
       );
-    } else if (this.state.initiative == "other") {
+    } else if (this.state.initiative === "other") {
       errors.date = validations.validateRequired(this.state.values.date);
       errors.person = validations.validateAlphabetic(
         this.state.values.person,
@@ -291,9 +298,9 @@ class CreativeForm extends React.Component {
         this.setState(state => ({
           errors: { ...state.errors, size: null }
         }));
-        this.setState({
-          values: { ...this.state.values, size: "1x1" }
-        });
+        this.setState(state => ({
+          values: { ...state.values, size: "1x1" }
+        }));
         this.setState(state => ({
           touched: { ...state.touched, size: true }
         }));
@@ -303,9 +310,9 @@ class CreativeForm extends React.Component {
         this.setState(state => ({
           errors: { ...state.errors, size: null }
         }));
-        this.setState({
-          values: { ...this.state.values, size: "0" }
-        });
+        this.setState(state => ({
+          values: { ...state.values, size: "0" }
+        }));
         this.setState(state => ({
           touched: { ...state.touched, size: true }
         }));
@@ -314,11 +321,13 @@ class CreativeForm extends React.Component {
 
     if (!this.state.values.creativeVariation) {
       this.setState(state => ({
+        values: { ...state.values, creativeVariation: "0" }
+      }));
+
+      this.setState(state => ({
         errors: { ...state.errors, creativeVariation: null }
       }));
-      this.setState({
-        values: { ...this.state.values, creativeVariation: "0" }
-      });
+
       this.setState(state => ({
         touched: { ...state.touched, creativeVariation: true }
       }));
@@ -329,13 +338,13 @@ class CreativeForm extends React.Component {
         locale: this.locale
       });
       this.setState(state => ({
-        errors: { ...state.errors, creativeVariation: null }
+        errors: { ...state.errors, date: null }
       }));
-      this.setState({
-        values: { ...this.state.values, date: _date }
-      });
       this.setState(state => ({
-        touched: { ...state.touched, creativeVariation: true }
+        values: { ...state.values, date: _date }
+      }));
+      this.setState(state => ({
+        touched: { ...state.touched, date: true }
       }));
     }
   }
@@ -783,16 +792,15 @@ class CreativeForm extends React.Component {
                     {this.state.btnText}
                   </Button>
                 </div>
-                {/* <div className="mui--text-center">
+                <div className="mui--text-center">
                   <Button
                     variant="raised"
                     color="primary"
                     onClick={this.onReset}
-                    disabled={!this.state.dirty || this.state.isSubmitting}
                   >
                     Reset
                   </Button>
-                </div> */}
+                </div>
               </Col>
             </Row>
           </Container>
@@ -806,14 +814,27 @@ class Creative extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      client: props.location.state.client,
-      initiative: props.location.state.initiative
-    };
+    try {
+      this.state = {
+        client: props.location.state.client,
+        initiative: props.location.state.initiative,
+        error: false
+      };
+    } catch (error) {
+      this.state = {
+        client: "",
+        initiative: "",
+        error: true
+      };
+    }
   }
 
   render() {
-    return <CreativeForm {...this.state} />;
+    return !this.state.error ? (
+      <CreativeForm {...this.state} />
+    ) : (
+      <Redirect to="/" />
+    );
   }
 }
 

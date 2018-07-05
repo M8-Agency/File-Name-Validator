@@ -130,7 +130,7 @@ function validateAlphabetic(value, required) {
   if (!value && required) {
     return "Required";
   } else if (!/^([A-Za-z]){1,15}$/i.test(value)) {
-    return "Invalid characters, only alphabetic characters";
+    return "Invalid characters, only letters allowed";
   }
 }
 

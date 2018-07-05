@@ -756,7 +756,6 @@ class CreativeForm extends React.Component {
             </Row>
             <Row>
               <Col md="8" md-offset="2">
-                {/* <div className={!this.state.nameVisible && "_hidden"}> */}
                 <div>
                   <br />
                   <Input

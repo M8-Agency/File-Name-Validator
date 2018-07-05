@@ -40,11 +40,11 @@ class CreativeSpecs extends React.Component {
   render() {
     return (
       <div>
-        <div id="content-wrapper" class="mui--text-center">
-          <div class="mui--appbar-height" />
+        <div id="content-wrapper" className="mui--text-center">
+          <div className="mui--appbar-height" />
           <br />
           <br />
-          <div class="mui--text-display2">Creative Name</div>
+          <div className="mui--text-display2">Creative Name</div>
         </div>
         <Container fluid={true}>
           <Row>

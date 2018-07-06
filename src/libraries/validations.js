@@ -71,13 +71,13 @@ function validateSize(size, creativeType) {
     creativeType !== "video" &&
     creativeType !== "deck" &&
     creativeType !== "page" &&
-    !/^(([0-9]){1,3}x([0-9]){1,3}$)$/i.test(size)
+    !/^(([0-9]){1,10}x([0-9]){1,10}$)$/i.test(size)
   ) {
     return "Invalid format";
   } else if (
     creativeType !== "deck" &&
     creativeType !== "page" &&
-    !/^(([0-9]){1,3}x([0-9]){1,3}$)|^([0-9])+(sec)$/i.test(size)
+    !/^(([0-9]){1,10}x([0-9]){1,10}$)|^([0-9])+(sec)$/i.test(size)
   ) {
     return "Invalid characters";
   }

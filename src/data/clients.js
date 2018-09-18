@@ -3,6 +3,7 @@ const clients = [
   { value: "cpa", label: "Copa Airlines" },
   { value: "htz", label: "Hertz" },
   { value: "spr", label: "Sprint" },
+  { value: "kfc", label: "KFC" },
   { value: "aaa", label: "Other" }
 ];
 

@@ -235,7 +235,7 @@ class CreativeForm extends React.Component {
       this.state.values.creativePillar
     );
 
-    errors.concept = validations.validateAlphabetic(
+    errors.concept = validations.validateAlphanumeric(
       this.state.values.concept,
       true
     );
@@ -372,7 +372,7 @@ class CreativeForm extends React.Component {
                   <Input
                     id="campaignCode"
                     name="campaignCode"
-                    label={`Campaign code (Example: ${this.state.client.toUpperCase()}.1001)`}
+                    label={`1. Campaign code (Example: ${this.state.client.toUpperCase()}.1001)`}
                     floatingLabel={true}
                     type="text"
                     value={this.state.values.campaignCode}
@@ -392,9 +392,74 @@ class CreativeForm extends React.Component {
                       </div>
                     )}
                 </div>
+
+                {this.state.client === "aaa" ? (
+                  <div>
+                    <Input
+                      floatingLabel={true}
+                      invalid={
+                        this.state.errors.creativePillar &&
+                        this.state.touched.creativePillar
+                          ? true
+                          : false
+                      }
+                      name="creativePillar"
+                      id="creativePillar"
+                      label="2. Creative pillar"
+                      value={this.state.values.creativePillar}
+                      onChange={this.onChange}
+                      onBlur={this.onBlur}
+                    />
+
+                    {this.state.errors.creativePillar &&
+                      this.state.touched.creativePillar && (
+                        <div className="input-feedback">
+                          {this.state.errors.creativePillar}
+                        </div>
+                      )}
+                  </div>
+                ) : (
+                  <div>
+                    <Select
+                      floatingLabel={true}
+                      invalid={
+                        this.state.errors.creativePillar &&
+                        this.state.touched.creativePillar
+                          ? true
+                          : false
+                      }
+                      name="creativePillar"
+                      id="creativePillar"
+                      label="2. Creative pillar"
+                      value={this.state.values.creativePillar}
+                      onChange={this.onChange}
+                      onBlur={this.onBlur}
+                    >
+                      {getCreativePillar(this.state.client).map(function(
+                        option,
+                        i
+                      ) {
+                        return (
+                          <Option
+                            key={i}
+                            value={option.value}
+                            label={option.label}
+                          />
+                        );
+                      })}
+                    </Select>
+
+                    {this.state.errors.creativePillar &&
+                      this.state.touched.creativePillar && (
+                        <div className="input-feedback">
+                          {this.state.errors.creativePillar}
+                        </div>
+                      )}
+                  </div>
+                )}
                 <div>
                   <Input
-                    label="Creative concept"
+                    label="3. Creative concept"
                     floatingLabel={true}
                     id="concept"
                     name="concept"
@@ -418,50 +483,24 @@ class CreativeForm extends React.Component {
 
                 <div>
                   <Input
-                    label="Language (Example: spa or spa-eng)"
+                    label="4. Size/lenght (Example: 300x200 or 5sec)"
                     floatingLabel={true}
                     invalid={
-                      this.state.errors.language && this.state.touched.language
+                      this.state.errors.size && this.state.touched.size
                         ? true
                         : false
                     }
-                    id="language"
-                    name="language"
+                    id="size"
+                    name="size"
                     type="text"
-                    value={this.state.values.language}
+                    value={this.state.values.size}
                     onChange={this.onChange}
                     onBlur={this.onBlur}
                   />
-                  {this.state.errors.language &&
-                    this.state.touched.language && (
+                  {this.state.errors.size &&
+                    this.state.touched.size && (
                       <div className="input-feedback">
-                        {this.state.errors.language}
-                      </div>
-                    )}
-                </div>
-
-                <div>
-                  <Input
-                    label="Creative variation"
-                    floatingLabel={true}
-                    invalid={
-                      this.state.errors.creativeVariation &&
-                      this.state.touched.creativeVariation
-                        ? true
-                        : false
-                    }
-                    id="creativeVariation"
-                    name="creativeVariation"
-                    type="text"
-                    defaultValue="sssss0"
-                    value={this.state.values.creativeVariation}
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                  />
-                  {this.state.errors.creativeVariation &&
-                    this.state.touched.creativeVariation && (
-                      <div className="input-feedback">
-                        {this.state.errors.creativeVariation}
+                        {this.state.errors.size}
                       </div>
                     )}
                 </div>
@@ -469,29 +508,31 @@ class CreativeForm extends React.Component {
                 {this.state.initiative === "social" && (
                   <div>
                     <Input
-                      label="Carousel frame (if required)"
+                      label="5. Creative variant"
                       floatingLabel={true}
                       invalid={
-                        this.state.errors.carouselFrame &&
-                        this.state.touched.carouselFrame
+                        this.state.errors.creativeVariation &&
+                        this.state.touched.creativeVariation
                           ? true
                           : false
                       }
-                      id="carouselFrame"
-                      name="carouselFrame"
+                      id="creativeVariation"
+                      name="creativeVariation"
                       type="text"
-                      value={this.state.values.carouselFrame}
+                      defaultValue="0"
+                      value={this.state.values.creativeVariation}
                       onChange={this.onChange}
                       onBlur={this.onBlur}
                     />
-                    {this.state.errors.carouselFrame &&
-                      this.state.touched.carouselFrame && (
+                    {this.state.errors.creativeVariation &&
+                      this.state.touched.creativeVariation && (
                         <div className="input-feedback">
-                          {this.state.errors.carouselFrame}
+                          {this.state.errors.creativeVariation}
                         </div>
                       )}
                   </div>
                 )}
+
                 {this.state.initiative === "other" && (
                   <div>
                     <Input
@@ -538,74 +579,84 @@ class CreativeForm extends React.Component {
                 )}
               </Col>
               <Col sm="6" md="6">
-                {this.state.client === "other" ? (
+                {this.state.initiative !== "social" && (
                   <div>
                     <Input
+                      label="5. Creative variant"
                       floatingLabel={true}
                       invalid={
-                        this.state.errors.creativePillar &&
-                        this.state.touched.creativePillar
+                        this.state.errors.creativeVariation &&
+                        this.state.touched.creativeVariation
                           ? true
                           : false
                       }
-                      name="creativePillar"
-                      id="creativePillar"
-                      label="Creative pillar"
-                      value={this.state.values.creativePillar}
+                      id="creativeVariation"
+                      name="creativeVariation"
+                      type="text"
+                      defaultValue="0"
+                      value={this.state.values.creativeVariation}
                       onChange={this.onChange}
                       onBlur={this.onBlur}
                     />
-
-                    {this.state.errors.creativePillar &&
-                      this.state.touched.creativePillar && (
+                    {this.state.errors.creativeVariation &&
+                      this.state.touched.creativeVariation && (
                         <div className="input-feedback">
-                          {this.state.errors.creativePillar}
-                        </div>
-                      )}
-                  </div>
-                ) : (
-                  <div>
-                    <Select
-                      floatingLabel={true}
-                      invalid={
-                        this.state.errors.creativePillar &&
-                        this.state.touched.creativePillar
-                          ? true
-                          : false
-                      }
-                      name="creativePillar"
-                      id="creativePillar"
-                      label="Creative pillar"
-                      value={this.state.values.creativePillar}
-                      onChange={this.onChange}
-                      onBlur={this.onBlur}
-                    >
-                      {getCreativePillar(this.state.client).map(function(
-                        option,
-                        i
-                      ) {
-                        return (
-                          <Option
-                            key={i}
-                            value={option.value}
-                            label={option.label}
-                          />
-                        );
-                      })}
-                    </Select>
-
-                    {this.state.errors.creativePillar &&
-                      this.state.touched.creativePillar && (
-                        <div className="input-feedback">
-                          {this.state.errors.creativePillar}
+                          {this.state.errors.creativeVariation}
                         </div>
                       )}
                   </div>
                 )}
+                <div>
+                  <Input
+                    label="6. Tech (Optional, Example: 1Mb or expandable)"
+                    floatingLabel={true}
+                    invalid={
+                      this.state.errors.tech && this.state.touched.tech
+                        ? true
+                        : false
+                    }
+                    id="tech"
+                    name="tech"
+                    type="text"
+                    value={this.state.values.tech}
+                    onChange={this.onChange}
+                    onBlur={this.onBlur}
+                  />
+                  {this.state.errors.tech &&
+                    this.state.touched.tech && (
+                      <div className="input-feedback">
+                        {this.state.errors.tech}
+                      </div>
+                    )}
+                </div>
+
+                <div>
+                  <Input
+                    label="7. Language (Example: spa or spa-eng)"
+                    floatingLabel={true}
+                    invalid={
+                      this.state.errors.language && this.state.touched.language
+                        ? true
+                        : false
+                    }
+                    id="language"
+                    name="language"
+                    type="text"
+                    value={this.state.values.language}
+                    onChange={this.onChange}
+                    onBlur={this.onBlur}
+                  />
+                  {this.state.errors.language &&
+                    this.state.touched.language && (
+                      <div className="input-feedback">
+                        {this.state.errors.language}
+                      </div>
+                    )}
+                </div>
 
                 <div>
                   <Select
-                    label="Creative type"
+                    label="8. Creative type"
                     floatingLabel={true}
                     invalid={
                       this.state.errors.creativeType &&
@@ -641,57 +692,37 @@ class CreativeForm extends React.Component {
                     )}
                 </div>
 
-                <div>
-                  <Input
-                    label="Size/lenght (Example: 300x200 or 5sec)"
-                    floatingLabel={true}
-                    invalid={
-                      this.state.errors.size && this.state.touched.size
-                        ? true
-                        : false
-                    }
-                    id="size"
-                    name="size"
-                    type="text"
-                    value={this.state.values.size}
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                  />
-                  {this.state.errors.size &&
-                    this.state.touched.size && (
-                      <div className="input-feedback">
-                        {this.state.errors.size}
-                      </div>
-                    )}
-                </div>
-                <div>
-                  <Input
-                    label="Tech (optional)"
-                    floatingLabel={true}
-                    invalid={
-                      this.state.errors.tech && this.state.touched.tech
-                        ? true
-                        : false
-                    }
-                    id="tech"
-                    name="tech"
-                    type="text"
-                    value={this.state.values.tech}
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                  />
-                  {this.state.errors.tech &&
-                    this.state.touched.tech && (
-                      <div className="input-feedback">
-                        {this.state.errors.tech}
-                      </div>
-                    )}
-                </div>
+                {this.state.initiative === "social" && (
+                  <div>
+                    <Input
+                      label="9. Carousel frame (if required)"
+                      floatingLabel={true}
+                      invalid={
+                        this.state.errors.carouselFrame &&
+                        this.state.touched.carouselFrame
+                          ? true
+                          : false
+                      }
+                      id="carouselFrame"
+                      name="carouselFrame"
+                      type="text"
+                      value={this.state.values.carouselFrame}
+                      onChange={this.onChange}
+                      onBlur={this.onBlur}
+                    />
+                    {this.state.errors.carouselFrame &&
+                      this.state.touched.carouselFrame && (
+                        <div className="input-feedback">
+                          {this.state.errors.carouselFrame}
+                        </div>
+                      )}
+                  </div>
+                )}
 
                 {this.state.initiative === "social" && (
                   <div>
                     <Select
-                      label="Platform"
+                      label="10. Platform"
                       floatingLabel={true}
                       invalid={
                         this.state.errors.platform &&

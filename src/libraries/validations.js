@@ -26,6 +26,12 @@ function validateClient(campaignCode, client) {
           "You selected Sprint, the client code does not match. It should be SPR ";
 
       break;
+    case "kfc":
+      if (value !== "KFC")
+        error =
+          "You selected KFC, the client code does not match. It should be KFC ";
+
+      break;
     default:
       break;
   }
@@ -89,7 +95,7 @@ function validateCreativeVariation(creativeVariation, creativePillar, client) {
     !/^(\d)+$/i.test(creativeVariation)
   ) {
     return "Invalid characters, for the creative pillar selected it's only accept numbers";
-  } else if (!/([A-Za-z0-9])*/i.test(creativeVariation)) {
+  } else if (!/^([A-Za-z0-9])*$/i.test(creativeVariation)) {
     /* "Invalid characters, for the creative pillar selected it's only accept numbers"; */
     return "Invalid characters";
   }
@@ -97,7 +103,7 @@ function validateCreativeVariation(creativeVariation, creativePillar, client) {
 function validateAlphanumeric(value, required) {
   if (required && !value) {
     return "Required";
-  } else if (!/([A-Za-z0-9])*/i.test(value)) {
+  } else if (!/^([A-Za-z0-9])*$/i.test(value)) {
     return "Invalid characters";
   }
 }

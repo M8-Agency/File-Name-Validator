@@ -6,8 +6,12 @@ function getCreativePillar(client) {
       return creativePillarVFL;
     case "spr":
       return creativePillarSPR;
-    default:
+    case "kfc":
+      return creativePillarKFC;
+    case "cpa":
       return creativePillarCPA;
+    default:
+      return [];
   }
 }
 
@@ -22,7 +26,8 @@ const creativePillarHTZ = [
   { value: "benefits", label: "benefits" },
   { value: "car", label: "car" },
   { value: "promo", label: "promo" },
-  { value: "generic", label: "generic" }
+  { value: "generic", label: "generic" },
+  { value: "other", label: "Other" }
 ];
 
 const creativePillarVFL = [
@@ -36,14 +41,16 @@ const creativePillarVFL = [
   { value: "spring", label: "Spring" },
   { value: "summer", label: "Summer" },
   { value: "international", label: "International" },
-  { value: "partner", label: "Partner" }
+  { value: "partner", label: "Partner" },
+  { value: "other", label: "Other" }
 ];
 
 const creativePillarCPA = [
   {},
   { value: "bm", label: "Be More" },
-  { value: "gb", label: "Get Better" },
-  { value: "gp", label: "Go Places" }
+  { value: "fb", label: "Feel Better" },
+  { value: "gp", label: "Go Places" },
+  { value: "other", label: "Other" }
 ];
 
 const creativePillarSPR = [
@@ -52,7 +59,23 @@ const creativePillarSPR = [
   { value: "phonesdeviceoffers", label: "Phones/Device Offers" },
   { value: "addons", label: "Add-Ons" },
   { value: "sponsorships", label: "Sponsorships" },
-  { value: "webteleexclusives", label: "Web/Tele Exclusives" }
+  { value: "webteleexclusives", label: "Web/Tele Exclusives" },
+  { value: "other", label: "Other" }
+];
+
+const creativePillarKFC = [
+  {},
+  { value: "mc-innovation", label: "MC Innovation" },
+  { value: "mc-uniquemoments", label: "MC Uniquemoments" },
+  { value: "mc-trueyou", label: "MC True You" },
+  { value: "va-money", label: "VA Money" },
+  { value: "va-time", label: "VA Time" },
+  { value: "va-food", label: "VA Food" },
+  { value: "fs-foodprep", label: "FS Foodprep" },
+  { value: "fs-secretrecipe", label: "FS Secret Recipe" },
+  { value: "fs-colonel", label: "FS Colonel" },
+  { value: "campaign", label: "Campaign" },
+  { value: "other", label: "Other" }
 ];
 
 export default { getCreativePillar };

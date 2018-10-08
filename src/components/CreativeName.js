@@ -64,7 +64,7 @@ class CreativeForm extends React.Component {
       creativeVariation: "",
       size: "",
       tech: "",
-      language: "",
+      languages: "",
       creativeType: "",
       carouselFrame: "",
       platform: "",
@@ -80,7 +80,7 @@ class CreativeForm extends React.Component {
       creativeVariation: false,
       size: false,
       tech: false,
-      language: false,
+      languages: false,
       creativeType: false,
       carouselFrame: false,
       platform: false,
@@ -174,7 +174,7 @@ class CreativeForm extends React.Component {
       creativeVariation: true,
       size: true,
       tech: true,
-      language: true,
+      languages: true,
       creativeType: true,
       carouselFrame: true,
       platform: true,
@@ -261,10 +261,12 @@ class CreativeForm extends React.Component {
       true
     );
 
-    errors.language = validations.validateLanguage(this.state.values.language);
+    errors.languages = validations.validateLanguage(
+      this.state.values.languages
+    );
 
     if (this.state.initiative === "social") {
-      errors.carouselFrame = validations.validateAlphanumeric(
+      errors.carouselFrame = validations.validateCarouselFrame(
         this.state.values.carouselFrame,
         false
       );
@@ -367,7 +369,7 @@ class CreativeForm extends React.Component {
         <form onSubmit={this.onSubmit}>
           <Container fluid={true}>
             <Row>
-              <Col sm="6" md="6">
+              <Col sm="12" md="6">
                 <div>
                   <Input
                     id="campaignCode"
@@ -483,7 +485,7 @@ class CreativeForm extends React.Component {
 
                 <div>
                   <Input
-                    label="4. Size/lenght (Example: 300x200 or 5sec)"
+                    label="4. Creative size/Running time (Example: 300x200 or 5sec)"
                     floatingLabel={true}
                     invalid={
                       this.state.errors.size && this.state.touched.size
@@ -578,7 +580,7 @@ class CreativeForm extends React.Component {
                   </div>
                 )}
               </Col>
-              <Col sm="6" md="6">
+              <Col sm="12" md="6">
                 {this.state.initiative !== "social" && (
                   <div>
                     <Input
@@ -635,21 +637,22 @@ class CreativeForm extends React.Component {
                     label="7. Language (Example: spa or spa-eng)"
                     floatingLabel={true}
                     invalid={
-                      this.state.errors.language && this.state.touched.language
+                      this.state.errors.languages &&
+                      this.state.touched.languages
                         ? true
                         : false
                     }
-                    id="language"
-                    name="language"
+                    id="languages"
+                    name="languages"
                     type="text"
-                    value={this.state.values.language}
+                    value={this.state.values.languages}
                     onChange={this.onChange}
                     onBlur={this.onBlur}
                   />
-                  {this.state.errors.language &&
-                    this.state.touched.language && (
+                  {this.state.errors.languages &&
+                    this.state.touched.languages && (
                       <div className="input-feedback">
-                        {this.state.errors.language}
+                        {this.state.errors.languages}
                       </div>
                     )}
                 </div>
@@ -802,7 +805,7 @@ class CreativeForm extends React.Component {
                       this.state.values.creativeVariation,
                       this.state.values.size,
                       this.state.values.tech,
-                      this.state.values.language,
+                      this.state.values.languages,
                       this.state.values.creativeType,
                       this.state.values.carouselFrame,
                       this.state.values.platform,

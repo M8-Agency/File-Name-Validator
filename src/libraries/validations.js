@@ -53,7 +53,7 @@ function validateCreativePillar(creativePillar) {
   let _error = null;
   if (!creativePillar) {
     _error = "Required";
-  } else if (!/^([a-z0-9%$]){1,15}$/i.test(creativePillar)) {
+  } else if (!/^([a-z0-9-%$]){1,20}$/i.test(creativePillar)) {
     _error = "Invalid characters on creative pillar";
   }
   return _error;
@@ -63,16 +63,24 @@ function validateSize(size, creativeType) {
   if (!size) {
     return "Required";
   } else if (
+    !creativeType &&
+    !/^(([0-9]){1,10}x([0-9]){1,10}$)|^([0-9])+(sec)$/i.test(size)
+  ) {
+    return "Invalid characters";
+  } else if (
+    creativeType &&
     (creativeType === "deck" || creativeType === "page") &&
     size !== 0
   ) {
     return "For Deck or Page creative type the size is 0";
   } else if (
+    creativeType &&
     (creativeType === "audio" || creativeType === "video") &&
     !/^([0-9])+(sec)$/i.test(size)
   ) {
     return `Invalid format for ${creativeType} creative type`;
   } else if (
+    creativeType &&
     creativeType !== "audio" &&
     creativeType !== "video" &&
     creativeType !== "deck" &&
@@ -81,6 +89,7 @@ function validateSize(size, creativeType) {
   ) {
     return "Invalid format";
   } else if (
+    creativeType &&
     creativeType !== "deck" &&
     creativeType !== "page" &&
     !/^(([0-9]){1,10}x([0-9]){1,10}$)|^([0-9])+(sec)$/i.test(size)
@@ -104,7 +113,15 @@ function validateAlphanumeric(value, required) {
   if (required && !value) {
     return "Required";
   } else if (!/^([A-Za-z0-9])*$/i.test(value)) {
-    return "Invalid characters";
+    return "Invalid characters, only alphanumeric characters allowed";
+  }
+}
+
+function validateCarouselFrame(value, required) {
+  if (required && !value) {
+    return "Required";
+  } else if (!/^([0-9]){2}$/i.test(value)) {
+    return "Invalid characters. Only two-digit numbers are allowed (Example: 02, 12).";
   }
 }
 function validListLanguage(lang_values) {
@@ -150,5 +167,6 @@ export {
   validateLanguage,
   validateRequired,
   validateNumbers,
-  validateAlphabetic
+  validateAlphabetic,
+  validateCarouselFrame
 };

@@ -13,7 +13,7 @@ class CreativeSpecs extends React.Component {
     super(props);
 
     const initialState = {
-      client: "cpa",
+      client: "vfl",
       initiative: "display"
     };
     this.state = initialState;

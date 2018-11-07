@@ -32,17 +32,18 @@ const creativePillarHTZ = [
 
 const creativePillarVFL = [
   {},
-  { value: "wintersunseekers", label: "Winter Sunseekers" },
-  { value: "impulsegetaways", label: "Impulse Getaways" },
-  { value: "familymemorymakers", label: "Family Memory Makers" },
-  { value: "adventureseekers", label: "Adventure Seekers" },
-  { value: "experienceseekers", label: "Experience seekers" },
+  { value: "impulse", label: "Impulse" },
+  { value: "adventure", label: "Adventure" },
+  { value: "winter", label: "Winter" },
+  { value: "summer", label: "Summer" },
   { value: "fall", label: "Fall" },
   { value: "spring", label: "Spring" },
-  { value: "summer", label: "Summer" },
+  { value: "family-hispanic", label: "Family Hispanic" },
+  { value: "family-african-american", label: "Family African American" },
+  { value: "family", label: "Family" },
+  { value: "experience", label: "Experience" },
   { value: "international", label: "International" },
-  { value: "partner", label: "Partner" },
-  { value: "other", label: "Other" }
+  { value: "partner", label: "Partner" }
 ];
 
 const creativePillarCPA = [

@@ -6,9 +6,9 @@ function validateClient(campaignCode, client) {
 
   switch (client) {
     case "vfl":
-      if (value !== "VFL" && value !== "VFD")
+      if (value !== "VFL" && value !== "VFD" && value !== "VFC")
         error =
-          "You selected Visit Florida, the client code does not match. It should be VFL or VFD ";
+          "You selected Visit Florida, the client code does not match. It should be VFL, VFC or VFD ";
       break;
     case "cpa":
       if (value !== "CPA")

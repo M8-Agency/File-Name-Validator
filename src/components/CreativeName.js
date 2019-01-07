@@ -475,12 +475,11 @@ class CreativeForm extends React.Component {
                         : false
                     }
                   />
-                  {this.state.errors.concept &&
-                    this.state.touched.concept && (
-                      <div className="input-feedback">
-                        {this.state.errors.concept}
-                      </div>
-                    )}
+                  {this.state.errors.concept && this.state.touched.concept && (
+                    <div className="input-feedback">
+                      {this.state.errors.concept}
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -499,18 +498,17 @@ class CreativeForm extends React.Component {
                     onChange={this.onChange}
                     onBlur={this.onBlur}
                   />
-                  {this.state.errors.size &&
-                    this.state.touched.size && (
-                      <div className="input-feedback">
-                        {this.state.errors.size}
-                      </div>
-                    )}
+                  {this.state.errors.size && this.state.touched.size && (
+                    <div className="input-feedback">
+                      {this.state.errors.size}
+                    </div>
+                  )}
                 </div>
 
                 {this.state.initiative === "social" && (
                   <div>
                     <Input
-                      label="5. Creative variant"
+                      label="5. Creative variant(Example: rate, norate, 20off)"
                       floatingLabel={true}
                       invalid={
                         this.state.errors.creativeVariation &&
@@ -552,12 +550,11 @@ class CreativeForm extends React.Component {
                       onChange={this.onChange}
                       onBlur={this.onBlur}
                     />
-                    {this.state.errors.person &&
-                      this.state.touched.person && (
-                        <div className="input-feedback">
-                          {this.state.errors.person}
-                        </div>
-                      )}
+                    {this.state.errors.person && this.state.touched.person && (
+                      <div className="input-feedback">
+                        {this.state.errors.person}
+                      </div>
+                    )}
                   </div>
                 )}
                 {this.state.initiative === "other" && (
@@ -584,7 +581,7 @@ class CreativeForm extends React.Component {
                 {this.state.initiative !== "social" && (
                   <div>
                     <Input
-                      label="5. Creative variant"
+                      label="5. Creative variant(Example: rate, norate, 20off)"
                       floatingLabel={true}
                       invalid={
                         this.state.errors.creativeVariation &&
@@ -610,7 +607,7 @@ class CreativeForm extends React.Component {
                 )}
                 <div>
                   <Input
-                    label="6. Tech (Optional, Example: 1Mb or expandable)"
+                    label="6. Tech(Optional, Example: 1Mb, 18fps, expandsto500x500)"
                     floatingLabel={true}
                     invalid={
                       this.state.errors.tech && this.state.touched.tech
@@ -624,12 +621,11 @@ class CreativeForm extends React.Component {
                     onChange={this.onChange}
                     onBlur={this.onBlur}
                   />
-                  {this.state.errors.tech &&
-                    this.state.touched.tech && (
-                      <div className="input-feedback">
-                        {this.state.errors.tech}
-                      </div>
-                    )}
+                  {this.state.errors.tech && this.state.touched.tech && (
+                    <div className="input-feedback">
+                      {this.state.errors.tech}
+                    </div>
+                  )}
                 </div>
 
                 <div>

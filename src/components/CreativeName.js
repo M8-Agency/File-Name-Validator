@@ -621,7 +621,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative === "social" && (
 									<div class="divHelp">
 										<Input
-											label="5. Tech (Optional, Example: 1Mb, 18fps, expandsto500x500)"
+											label="5. Tech (Optional, Example: 1mb, 18fps)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors.tech &&
@@ -726,7 +726,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative !== "social" && (
 									<div class="divHelp">
 										<Input
-											label="5. Tech (Optional, Example: 1Mb, 18fps, expandsto500x500)"
+											label="5. Tech (Optional, Example: 1mb, 18fps)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors.tech &&

@@ -31,11 +31,14 @@ function createName(
   const _carouselFrame =
     creativeType && carouselFrame ? "-" + carouselFrame.toLowerCase() : "";
 
+  creativeType = creativeType.replace("storyimage", "story");
+  creativeType = creativeType.replace("storyvideo", "story");
   const _creativeType = creativeType
     ? creativeType.toLowerCase() +
       _carouselFrame +
       (initiative === "social" ? "_" : "")
     : "";
+ 
   const _version = version && `_${version}_`;
   const _person = person && `${person.toLowerCase()}_`;
   const _date = date && `${date}`;

@@ -51,7 +51,9 @@ const creativeTypeSocial = [
 	{ value: "leadform", label: "Leadform" },
 	{ value: "page", label: "Page" },
 	{ value: "canvas", label: "Canvas" },
-	{ value: "dynamic", label: "Dynamic" }
+	{ value: "dynamic", label: "Dynamic" }, 
+	{ value: "storyimage", label: "Story-Image" }, 
+	{ value: "storyvideo", label: "Story-Video" }
 ];
 
 export default getCreativeType;

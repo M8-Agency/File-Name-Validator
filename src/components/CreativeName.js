@@ -532,7 +532,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative !== "social" && (
 									<div class="divHelp">
 										<Input
-											label="4. Creative variant(Example: rate, norate, 20off)"
+											label="4. Creative variant (Example: rate, norate, 20off)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors
@@ -577,7 +577,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative === "social" && (
 									<div class="divHelp">
 										<Input
-											label="4. Creative variant(Example: rate, norate, 20off)"
+											label="4. Creative variant (Example: rate, norate, 20off)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors
@@ -621,7 +621,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative === "social" && (
 									<div class="divHelp">
 										<Input
-											label="5. Tech(Optional, Example: 1Mb, 18fps, expandsto500x500)"
+											label="5. Tech (Optional, Example: 1Mb, 18fps, expandsto500x500)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors.tech &&
@@ -726,7 +726,7 @@ class CreativeForm extends React.Component {
 								{this.state.initiative !== "social" && (
 									<div class="divHelp">
 										<Input
-											label="5. Tech(Optional, Example: 1Mb, 18fps, expandsto500x500)"
+											label="5. Tech (Optional, Example: 1Mb, 18fps, expandsto500x500)"
 											floatingLabel={true}
 											invalid={
 												this.state.errors.tech &&
@@ -772,7 +772,7 @@ class CreativeForm extends React.Component {
 
 								<div class="divHelp">
 									<Input
-										label="6. Creative size/Running time "
+										label="6. Image size or Audio/Video lenght"
 										/* (Example: 300x200 or 5sec) */
 										floatingLabel={true}
 										invalid={
@@ -792,10 +792,13 @@ class CreativeForm extends React.Component {
 										title={
 											<React.Fragment>
 												<p>
-													Video, audio: 15sec <br />
+												- For Display use width x height. Example: 300x250 <br />
+												- For Audio or Video use running time in two digits accompanied by "sec". Example: 06sec <br />
+												- Default value is 1x1 <br />
+													{/* Video, audio: 15sec <br />
 													Image, HTML5, Rich Media:
 													(WxH) 300x250 <br />
-													Default value: 1x1
+													Default value: 1x1 */}
 												</p>
 											</React.Fragment>
 										}

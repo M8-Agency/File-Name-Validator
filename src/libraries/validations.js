@@ -81,16 +81,18 @@ function validateSize(size, creativeType) {
 		return "For Deck or Page creative type the size is 0";
 	} else if (
 		creativeType &&
-		(creativeType === "audio" || creativeType === "video") &&
+		(creativeType === "audio" || creativeType === "video" || creativeType === "storyvideo") &&
 		!/^([0-9])+(sec)$/i.test(size)
 	) {
-		return `Invalid format for ${creativeType} creative type`;
+		// return `Invalid format for ${creativeType} creative type`;
+		return "For audio and video, use length"
 	} else if (
 		creativeType &&
 		creativeType !== "audio" &&
 		creativeType !== "video" &&
 		creativeType !== "deck" &&
 		creativeType !== "page" &&
+		creativeType !== "storyvideo" &&
 		!/^(([0-9]){1,10}x([0-9]){1,10}$)$/i.test(size)
 	) {
 		return "Invalid format";
@@ -132,7 +134,7 @@ function validateAlphanumeric(value, required) {
 function validateCarouselFrame(value, required) {
 	if (required && !value) {
 		return "Required";
-	} else if (!/^([0-9]){2}$/i.test(value)) {
+	} else if (!/^([0-9]){2}$/i.test(value) && value !== "") {
 		return "Invalid characters. Only two-digit numbers are allowed (Example: 02, 12).";
 	}
 }
